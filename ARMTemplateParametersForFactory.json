@@ -1,0 +1,1318 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "value": "RNLADFNDPPROD"
+        },
+        "ls_AppboostCrmSqlDB_connectionString": {
+            "value": "Integrated Security=False;Data Source=@{linkedService().crm_servername};Initial Catalog=@{linkedService().crm_dbname};User ID=@{linkedService().crm_username}"
+        },
+        "ls_AzureSynapseAnalyticsCrmDB_connectionString": {
+            "value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().az_synapse_crm_server};Initial Catalog=@{linkedService().az_synapse_crm_db}"
+        },
+        "ls_AzureSqlDB_connectionString": {
+            "value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().az_server_name};Initial Catalog=@{linkedService().az_sql_db}"
+        },
+        "ls_AzureSynapseAnalytics_connectionString": {
+            "value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().az_synapse_em_server};Initial Catalog=@{linkedService().az_synapse_db}"
+        },
+        "ls_PartnerIntegration_zeemee_sftp_password": {
+            "value": ""
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_passPhrase": {
+            "value": ""
+        },
+        "Is_DigitalBoost_connectionString": {
+            "value": "Integrated Security=False;Data Source=@{linkedService().digitalboost_server};Initial Catalog=@{linkedService().digitalboost_db};User ID=@{linkedService().digitalboost_username}"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_test_privateKeyContent": {
+            "value": ""
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_test_passPhrase": {
+            "value": ""
+        },
+        "ls_RNLMAP_MSCRM_connectionString": {
+            "value": "Integrated Security=False;Data Source=@{linkedService().crm_servername};Initial Catalog=@{linkedService().crm_dbname};User ID=@{linkedService().crm_username}"
+        },
+        "ls_FQT_connectionString": {
+            "value": "Integrated Security=False;Data Source=@{linkedService().servername};Initial Catalog=@{linkedService().dbname};User ID=@{linkedService().username}"
+        },
+        "ls_appboost_dsc_prod_connectionString": {
+            "value": "Integrated Security=False;Data Source=10.200.0.22;Initial Catalog=RNLMAP_MSCRM;User ID=svc_az_ndp"
+        },
+        "ls_AzureSynapseAnalytics1_connectionString": {
+            "value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=rnlndpprodemdwsynapse.sql.azuresynapse.net;Initial Catalog=NDPPRODCRMPL1"
+        },
+        "ls_PowerBIReporting_connectionString": {
+            "value": "Integrated Security=False;Data Source=@{linkedService().crm_servername};Initial Catalog=@{linkedService().crm_dbname};User ID=@{linkedService().crm_username}"
+        },
+        "AzureMLServiceprod_servicePrincipalKey": {
+            "value": ""
+        },
+        "ls_rnlafasmisql_connectionString": {
+            "value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=rnlafasmisql.36de53b57069.database.windows.net;Initial Catalog=RNLAFASPBIDBE"
+        },
+        "AzureSynapseAnalyticsProdEmDW_properties_privateLinkResourceId": {
+            "value": "/subscriptions/7d860180-93f7-49bd-9ddc-4315ebd5a044/resourceGroups/RNLNDPPROD/providers/Microsoft.Synapse/workspaces/rnlndpprodemdwsynapse"
+        },
+        "AzureSynapseAnalyticsProdEmDW_properties_groupId": {
+            "value": "sql"
+        },
+        "AzureSynapseAnalyticsProdEmDW_properties_fqdns": {
+            "value": [
+                "rnlndpprodemdwsynapse.sql.azuresynapse.net"
+            ]
+        },
+        "AzureDataLakeStorageADFNDPProd_properties_privateLinkResourceId": {
+            "value": "/subscriptions/7d860180-93f7-49bd-9ddc-4315ebd5a044/resourceGroups/RNLNDPPROD/providers/Microsoft.Storage/storageAccounts/rnlndpproddls"
+        },
+        "AzureDataLakeStorageADFNDPProd_properties_groupId": {
+            "value": "dfs"
+        },
+        "AzureDataLakeStorageADFNDPProd_properties_fqdns": {
+            "value": [
+                "rnlndpproddls.dfs.core.windows.net"
+            ]
+        },
+        "trg-sp-Cultivator_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_group_name": {
+            "value": "Cultivator"
+        },
+        "trg-sp-Cultivator_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_exclude_group_dependency": {
+            "value": "true"
+        },
+        "trg-sp-Email_peformance_AC_Survey_Result_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_group_name": {
+            "value": "Email_peformance_AC_Survey_Result"
+        },
+        "trg-sp-Email_peformance_AC_Survey_Result_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_exclude_group_dependency": {
+            "value": "true"
+        },
+        "trg-sp-Inquiry_Management_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_group_name": {
+            "value": "Inquiry_Management"
+        },
+        "trg-sp-Inquiry_Management_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_exclude_group_dependency": {
+            "value": "true"
+        },
+        "trg-sp-Email_Performance_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_group_name": {
+            "value": "Email_Performance"
+        },
+        "trg-sp-Email_Performance_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_exclude_group_dependency": {
+            "value": "false"
+        },
+        "trg-sp-StudentList_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_group_name": {
+            "value": "StudentList"
+        },
+        "trg-sp-StudentList_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_exclude_group_dependency": {
+            "value": "true"
+        },
+        "trg-sp-Email_peformance_IM_Survey_Result_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_group_name": {
+            "value": "Email_peformance_IM_Survey_Result"
+        },
+        "trg-sp-Email_peformance_IM_Survey_Result_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_exclude_group_dependency": {
+            "value": "true"
+        },
+        "trg-sp-Marketing_Performance_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_group_name": {
+            "value": "Marketing_Performance"
+        },
+        "trg-sp-Marketing_Performance_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_exclude_group_dependency": {
+            "value": "false"
+        },
+        "trg-sp-cdi_sentemailBase_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_group_name": {
+            "value": "cdi_sentemailBase"
+        },
+        "trg-sp-cdi_sentemailBase_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_exclude_group_dependency": {
+            "value": "true"
+        },
+        "trg-sp-Email_peformance_Y_Survey_Result_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_group_name": {
+            "value": "Email_peformance_Y_Survey_Result"
+        },
+        "trg-sp-Email_peformance_Y_Survey_Result_properties_pip-master-powerbi-storedprocedure-crmsynapse_parameters_exclude_group_dependency": {
+            "value": "true"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_ContainerName": {
+            "value": "datalanding"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_rawFilePath": {
+            "value": "raw"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_Audit_Type_Pipeline": {
+            "value": "ETL"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_Audit_Type_File": {
+            "value": "File"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_Pipeline_Start_Status": {
+            "value": "Started"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_Pipeline_Complete_Status": {
+            "value": "Successful"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_Pipeline_Error_Status": {
+            "value": "Failed"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_File_Location_Status_Blob_to_Raw": {
+            "value": "In Data Landing- Raw"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_File_Location_Status_Raw_to_Validated": {
+            "value": "In Data Landing- Validated"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_File_Location_Status_Raw_to_Raw_archive": {
+            "value": "In Data Landing- Archived"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_File_Location_Status_Raw_to_Reject": {
+            "value": "In Data Landing- Rejected"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_File_Location_Status_Validated_to_EMInbound": {
+            "value": "In Data Landing- EMInbound(Filerenamed)"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_File_Location_Status_Config_files_Copy": {
+            "value": "In Data Landing- Config files generated"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_Area": {
+            "value": "DataLanding"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_InsertBy": {
+            "value": "ADF_User"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_ValidatePath": {
+            "value": "validated"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_RejectPath": {
+            "value": "rejected"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_Raw_Archived": {
+            "value": "raw_archived"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_Inbound": {
+            "value": "em_inbound"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_adlsName": {
+            "value": "rnlndpproddls"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_schemaFilename": {
+            "value": "Schema.csv"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_blobname": {
+            "value": "rnlprodblob"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_EmailSuccess": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-blob-to-adls_properties_pipeline_parameters_EmailFailure": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_adlsName": {
+            "value": "rnlndpproddls"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_containerName": {
+            "value": "datalanding"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_rnl_sftp_host": {
+            "value": "SFTP.RuffaloNL.com"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_rnl_sftp_username": {
+            "value": "Brillio_rnl"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_crm_db_name": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-sftp-to-adls_properties_pipeline_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_Purposename": {
+            "value": "EM Scoring"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_ContainerName": {
+            "value": "datalanding"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_Audit_Type_Pipeline": {
+            "value": "ETL"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_Audit_Type_File": {
+            "value": "File"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_Pipeline_Start_Status": {
+            "value": "Started"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_Pipeline_Complete_Status": {
+            "value": "Completed"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_Pipeline_Error_Status": {
+            "value": "Failed"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_File_Location_Status_DQE_Started": {
+            "value": "Data Landing- EMInbound(DQE Started)"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_Area": {
+            "value": "DataTransformation"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_InsertBy": {
+            "value": "ADF_User"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_Inbound": {
+            "value": "em_inbound"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_File_Location_Status_DQE_Completed": {
+            "value": "Data Landing- EMInbound(DQE Completed)"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_audit_schemaname": {
+            "value": "audit"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_file_metadata_table": {
+            "value": "file_metadata"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_adlsName": {
+            "value": "rnlndpproddls"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_EmailSuccess": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-dqe-adls-to-staging_properties_pipeline_parameters_EmailFailure": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_staging_table_list": {
+            "value": [
+                "staging.em_scoring",
+                "staging.em_aog",
+                "staging.em_marketing",
+                "staging.em_search_vendor_data",
+                "staging.em_suppression"
+            ]
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_is_log_on": {
+            "value": "1"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_synapse_database_name": {
+            "value": "NDPPRODCRMPL1"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_synapse_server_name": {
+            "value": "rnlndpprodcrmsynapse.sql.azuresynapse.net"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_synapse_stg_storage": {
+            "value": "rnlndpproddls"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_crm_server_name": {
+            "value": "10.200.0.22"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_crm_database_name": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_EmailSuccesURL": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-staging-to-alignment_properties_pipeline_parameters_EmailFailureURL": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-enrichment-master-EMGO_Master_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master-EMGO_Master_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master-EMGO_Master_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master-EMGO_Master_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master-EMGO_Master_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master-EMMarketing-Master_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master-EMMarketing-Master_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master-EMMarketing-Master_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master-EMMarketing-Master_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master-EMMarketing-Master_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master-EMSuppression-Master_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master-EMSuppression-Master_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master-EMSuppression-Master_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master-EMSuppression-Master_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master-EMSuppression-Master_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master-EMSearchVendorData-Master_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master-EMSearchVendorData-Master_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master-EMSearchVendorData-Master_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master-EMSearchVendorData-Master_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master-EMSearchVendorData-Master_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master_EMScoring_Master_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMScoring_Master_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMScoring_Master_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMScoring_Master_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMScoring_Master_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_Purposename": {
+            "value": "EM Historical Data"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_ContainerName": {
+            "value": "datalanding"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_Audit_Type_Pipeline": {
+            "value": "ETL"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_Audit_Type_File": {
+            "value": "File"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_Pipeline_Start_Status": {
+            "value": "Started"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_Pipeline_Complete_Status": {
+            "value": "Completed"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_Pipeline_Error_Status": {
+            "value": "Failed"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_File_Location_Status_DQE_Started": {
+            "value": "Data Landing- EMInbound(DQE Started)"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_Area": {
+            "value": "DataTransformation"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_InsertBy": {
+            "value": "ADF_User"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_Inbound": {
+            "value": "em_inbound"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_File_Location_Status_DQE_Completed": {
+            "value": "Data Landing- EMInbound(DQE Completed)"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_audit_schemaname": {
+            "value": "audit"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_file_metadata_table": {
+            "value": "file_metadata"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_vaulturl": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_email_success_url": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-dqe-staging-historical_properties_pipeline_parameters_email_fail_url": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_source_adls_location": {
+            "value": "prodsynapse/em_historical_data/DIA DS team"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_destination_adls_location": {
+            "value": "prodsynapse/em_historical_data/Modelling"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_folder_list": {
+            "value": [
+                "Inquiry",
+                "Search",
+                "Prospect",
+                "Admit",
+                "Applicant"
+            ]
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_search_list": {
+            "value": [
+                "INQ",
+                "SEA",
+                "PRO",
+                "ADM",
+                "APP"
+            ]
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_azure_sql_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_azure_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_container": {
+            "value": "prodsynapse"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_source_path": {
+            "value": "em_historical_data/DIA DS team"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_dest_path": {
+            "value": "em_historical_data"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_modeling_folder": {
+            "value": "Modeling"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_vaulturl": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-historical-modeling_properties_pipeline_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_flow": {
+            "value": "campusesp"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_WindowStart": {
+            "value": "@trigger().startTime"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_slugname": {
+            "value": "UniversityName"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_az_synapse_em_server": {
+            "value": "rnlndpprodemdwsynapse.sql.azuresynapse.net"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_az_synapse_db": {
+            "value": "NDPPRODDWPL1"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_zeemee_host": {
+            "value": "zeemee.exavault.com"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_zeemee_username": {
+            "value": "Ruffalo-NL"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_containerName": {
+            "value": "datalanding"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_campuse_esp_host": {
+            "value": "ftp.campusesp.com"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_SuccessEmailURL": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-campusesp-fw_properties_pip-master-partnerintegration-forward-flow_parameters_FailureEmailURL": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_flow": {
+            "value": "zeemee"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_WindowStart": {
+            "value": "@trigger().startTime"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_slugname": {
+            "value": "UniversityName"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_az_synapse_em_server": {
+            "value": "rnlndpprodemdwsynapse.sql.azuresynapse.net"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_az_synapse_db": {
+            "value": "NDPPRODDWPL1"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_zeemee_host": {
+            "value": "zeemee.exavault.com"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_zeemee_username": {
+            "value": "Ruffalo-NL"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_containerName": {
+            "value": "datalanding"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_campuse_esp_host": {
+            "value": "ftp.campusesp.com"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_SuccessEmailURL": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-zeemee-fw_properties_pip-master-partnerintegration-forward-flow_parameters_FailureEmailURL": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-enrichment-master_EMMarketing_Master_PacificEast_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMMarketing_Master_PacificEast_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMMarketing_Master_PacificEast_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMMarketing_Master_PacificEast_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMMarketing_Master_PacificEast_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master_EMGO_Master_PacificEast_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMGO_Master_PacificEast_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMGO_Master_PacificEast_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMGO_Master_PacificEast_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMGO_Master_PacificEast_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master_EMMarketing_Master_Melissa_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMMarketing_Master_Melissa_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMMarketing_Master_Melissa_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMMarketing_Master_Melissa_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMMarketing_Master_Melissa_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_Melissa_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_Melissa_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_Melissa_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_Melissa_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_Melissa_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master_EMGO_Master_Melissa_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMGO_Master_Melissa_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMGO_Master_Melissa_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMGO_Master_Melissa_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMGO_Master_Melissa_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_PacificEast_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_PacificEast_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_PacificEast_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_PacificEast_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMSearchVendorData_Master_PacificEast_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master_EMSuppression_Master_Melissa_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMSuppression_Master_Melissa_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMSuppression_Master_Melissa_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMSuppression_Master_Melissa_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMSuppression_Master_Melissa_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master_EMSuppression_Master_PacificEast_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMSuppression_Master_PacificEast_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMSuppression_Master_PacificEast_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMSuppression_Master_PacificEast_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMSuppression_Master_PacificEast_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_EmailSuccess": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_EmailFailure": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_az_synapse_crm_server": {
+            "value": "rnlndpprodcrmsynapse.sql.azuresynapse.net"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_az_synapse_crm_db": {
+            "value": "NDPPRODCRMPL1"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_fplus_host": {
+            "value": "\\\\10.3.30.67\\SoftScore"
+        },
+        "trg-fplus-forward-reverse-flow_properties_pipeline_parameters_fplus_username": {
+            "value": "RNLWINSASCOMP1\\svc_prod_fqt"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_vaulturl": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_az_synapse_crm_server": {
+            "value": "rnlndpprodcrmsynapse.sql.azuresynapse.net"
+        },
+        "trg-crm-to-ads-powerbi-load_properties_pip-master-crm-to-crmsynapse-powerbi-load_parameters_az_synapse_crm_db": {
+            "value": "NDPPRODCRMPL1"
+        },
+        "trg-enrichment-Melissa-master-EMScoring_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-Melissa-master-EMScoring_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-Melissa-master-EMScoring_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net"
+        },
+        "trg-enrichment-Melissa-master-EMScoring_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-Melissa-master-EMScoring_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "Fplus_Prod_Scoring_blob_trigger_properties_DS_TriggerScoring_FPLUS_ML_Pipelines_parameters_fname": {
+            "value": "@triggerBody().fileName"
+        },
+        "Fplus_Prod_Scoring_blob_trigger_properties_typeProperties_scope": {
+            "value": "/subscriptions/7d860180-93f7-49bd-9ddc-4315ebd5a044/resourceGroups/RNLNDPPROD/providers/Microsoft.Storage/storageAccounts/rnlndpproddls"
+        },
+        "trg_staging_data_purging_properties_pip-master-data-archive_parameters_azure_sql_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg_staging_data_purging_properties_pip-master-data-archive_parameters_azure_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg_staging_data_purging_properties_pip-master-data-archive_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg_staging_data_purging_properties_pip-master-data-archive_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg_staging_data_purging_properties_pip-master-data-archive_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg_staging_data_purging_properties_pip-master-data-archive_parameters_az_synapse_crm_db": {
+            "value": "NDPPRODCRMPL1"
+        },
+        "trg_staging_data_purging_properties_pip-master-data-archive_parameters_az_synapse_crm_server": {
+            "value": "rnlndpprodcrmsynapse.sql.azuresynapse.net"
+        },
+        "trg_staging_data_purging_properties_pip-master-data-archive_parameters_storage_account_name": {
+            "value": "rnlndpproddls"
+        },
+        "AFAS_Scoring_trigger_ML_pipelines_properties_DS_TriggerScoring_AFAS_ML_Pipelines_parameters_fname": {
+            "value": "@triggerBody().fileName"
+        },
+        "AFAS_Scoring_trigger_ML_pipelines_properties_typeProperties_scope": {
+            "value": "/subscriptions/7d860180-93f7-49bd-9ddc-4315ebd5a044/resourceGroups/RNLNDPPROD/providers/Microsoft.Storage/storageAccounts/rnlndpproddls"
+        },
+        "trg-sync-config-data-from-crm_properties_pip-copy-config-from-CRM-to-azSQL_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-sync-config-data-from-crm_properties_pip-copy-config-from-CRM-to-azSQL_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-sync-config-data-from-crm_properties_pip-copy-config-from-CRM-to-azSQL_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-sync-config-data-from-crm_properties_pip-copy-config-from-CRM-to-azSQL_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-sync-config-data-from-crm_properties_pip-copy-config-from-CRM-to-azSQL_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-sync-config-data-from-crm_properties_pip-copy-config-from-CRM-to-azSQL_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_vaulturl": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_az_synapse_crm_server": {
+            "value": "rnlndpprodcrmsynapse.sql.azuresynapse.net"
+        },
+        "trg-master-ads-to-crm_properties_pip-master-ads-to-crm_parameters_az_synapse_crm_db": {
+            "value": "NDPPRODCRMPL1"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_ContainerName": {
+            "value": "datalanding"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_InputFilePath": {
+            "value": "searchvendor"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_OutputFilePath": {
+            "value": "raw"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_adlsName": {
+            "value": "rnlndpproddls"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_EmailSuccess": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-search-vendor-adls_properties_pip-SearchVendor-Master_parameters_EmailFailure": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-enrichment-master_EMScoring_Master_PacificEast_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMScoring_Master_PacificEast_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMScoring_Master_PacificEast_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMScoring_Master_PacificEast_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMScoring_Master_PacificEast_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_windowStart": {
+            "value": "@trigger().startTime"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_az_synapse_em_server": {
+            "value": "rnlndpprodemdwsynapse.sql.azuresynapse.net"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_az_synapse_em_db": {
+            "value": "NDPPRODDWPL1"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-campusep-reverse-flow_properties_pip-campusesp-reverse-flow_parameters_campusesp_hostname": {
+            "value": "ftp.campusesp.com"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_EmailSuccess": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_EmailFailure": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_az_synapse_crm_server": {
+            "value": "rnlndpprodcrmsynapse.sql.azuresynapse.net"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_az_synapse_crm_db": {
+            "value": "NDPPRODCRMPL1"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_fplus_host": {
+            "value": "\\\\10.3.30.67\\SoftScore"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_fplus_username": {
+            "value": "RNLWINSASCOMP1\\svc_prod_fqt"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_softscore_root": {
+            "value": "SoftScore/UAT"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_synapsecontainer": {
+            "value": "prodcrmsynapse"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_softscore_adls": {
+            "value": "SoftScore"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_UncPath": {
+            "value": "/F2.0 Report - CSD - AM"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_rnl_sftp_host": {
+            "value": "SFTP.RuffaloNL.com"
+        },
+        "trg-fplus-reverse-flow_properties_pipeline_parameters_rnl_sftp_username": {
+            "value": "Brillio_rnl"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_az_sql_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_az_sql_db_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_EmailSuccess": {
+            "value": "https://prod-51.westus.logic.azure.com:443/workflows/5ebd1dba8bbb492e812b84f4e86ba426/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=1oKEwEZsA9W2ZHGi6e1ihm_4mpccHBle9UZjdW1uOkQ"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_EmailFailure": {
+            "value": "https://prod-142.westus.logic.azure.com:443/workflows/5076b5f623944e73a73d414747a65c6f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QRg61OekEK1VZcXvQ400AcHr41s8V4BW3mqk5l_sNEM"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_az_synapse_crm_server": {
+            "value": "rnlndpprodcrmsynapse.sql.azuresynapse.net"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_az_synapse_crm_db": {
+            "value": "NDPPRODCRMPL1"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_fplus_host": {
+            "value": "\\\\10.3.30.67\\SoftScore"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_fplus_username": {
+            "value": "RNLWINSASCOMP1\\svc_prod_fqt"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_storageaccountname": {
+            "value": "rnlndpproddls"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_crm_servername": {
+            "value": "10.200.0.22"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_crm_dbname": {
+            "value": "RNLMAP_MSCRM"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_crm_username": {
+            "value": "svc_az_ndp"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_softscore_root": {
+            "value": "SoftScore/UAT"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_synapsecontainer": {
+            "value": "prodcrmsynapse"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_softscore_adls": {
+            "value": "SoftScore"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_UncPath": {
+            "value": "/F2.0 Report - CSD - AM"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_rnl_sftp_host": {
+            "value": "SFTP.RuffaloNL.com"
+        },
+        "trg-fplus-rev-flow_properties_pip-fplus-reverse-flow_parameters_rnl_sftp_username": {
+            "value": "Brillio_rnl"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_2_properties_pipeline_parameters_databricks_workspace_url": {
+            "value": "https://adb-6587840185446536.16.azuredatabricks.net"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_2_properties_pipeline_parameters_databricks_clusterid": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_2_properties_pipeline_parameters_vault_url": {
+            "value": "https://rnlndp-prodkeyvault.vault.azure.net/"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_2_properties_pipeline_parameters_az_server_name": {
+            "value": "rnlndpprodazsql01.database.windows.net"
+        },
+        "trg-enrichment-master_EMScoring_Master_Melissa_Parallel_2_properties_pipeline_parameters_az_database_name": {
+            "value": "NDPPRODSQLDB"
+        },
+        "ls_Azuredatalakegen2_properties_typeProperties_url": {
+            "value": "https://@{linkedService().storageaccountname}.dfs.core.windows.net"
+        },
+        "ls_sftp_properties_typeProperties_host": {
+            "value": "@{linkedService().rnl_sftp_host}"
+        },
+        "ls_sftp_properties_typeProperties_userName": {
+            "value": "@{linkedService().rnl_sftp_username}"
+        },
+        "ls_FplusNetworkDrive_properties_typeProperties_host": {
+            "value": "@{linkedService().fplus_host}"
+        },
+        "ls_FplusNetworkDrive_properties_typeProperties_userId": {
+            "value": "@{linkedService().fplus_username}"
+        },
+        "ls_PartnerIntegration_zeemee_sftp_properties_typeProperties_host": {
+            "value": "@{linkedService().zeemee_host}"
+        },
+        "ls_PartnerIntegration_zeemee_sftp_properties_typeProperties_userName": {
+            "value": "@{linkedService().zeemee_username}"
+        },
+        "Is_KeyVault_properties_typeProperties_baseUrl": {
+            "value": "@{linkedService().VaultUrl}"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_properties_typeProperties_host": {
+            "value": "@{linkedService().campuse_esp_host}"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_properties_typeProperties_userName": {
+            "value": "@{linkedService().campus_esp_username}"
+        },
+        "ls_NDPdatabricks_properties_typeProperties_existingClusterId": {
+            "value": "0714-203005-9conw1v0"
+        },
+        "Is_Dynamics365_properties_typeProperties_username": {
+            "value": "RUFFALONL\\svcndpprodadfcrm"
+        },
+        "ls_DynamicsCrm_properties_typeProperties_username": {
+            "value": "RUFFALONL\\svcndpprodadfcrm"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_test_properties_typeProperties_host": {
+            "value": "ftp.campusesp-test.com"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_test_properties_typeProperties_userName": {
+            "value": "@{linkedService().username}"
+        },
+        "ls_NDPBlob_properties_typeProperties_serviceEndpoint": {
+            "value": "https://rnlprodblob.blob.core.windows.net/"
+        },
+        "ls_AzureDataLakeStorage1_properties_typeProperties_url": {
+            "value": "https://rnlndpproddls.dfs.core.windows.net/"
+        },
+        "ls_restapi_Melissa_properties_typeProperties_url": {
+            "value": "https://personator.melissadata.net/v3/WEB/ContactVerify"
+        },
+        "AzureMLServiceprod_properties_typeProperties_subscriptionId": {
+            "value": "7d860180-93f7-49bd-9ddc-4315ebd5a044"
+        },
+        "AzureMLServiceprod_properties_typeProperties_resourceGroupName": {
+            "value": "RNLNDPMLPROD"
+        },
+        "AzureMLServiceprod_properties_typeProperties_mlWorkspaceName": {
+            "value": "RNLNDPMLWSPROD"
+        },
+        "AzureMLServiceprod_properties_typeProperties_servicePrincipalId": {
+            "value": "4a71a761-482a-4ebc-9aa0-d38a1bd2871e"
+        },
+        "AzureMLServiceprod_properties_typeProperties_tenant": {
+            "value": "d9fa72a8-0554-450e-b06b-e822956ab212"
+        },
+        "rnlndpproddls_properties_typeProperties_serviceEndpoint": {
+            "value": "https://rnlndpproddls.blob.core.windows.net/"
+        }
+    }
+}
