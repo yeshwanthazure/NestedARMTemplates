@@ -1,0 +1,4186 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "RNLADFNDPPROD"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureSynapseAnalyticsTable133')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [
+                    {
+                        "name": "AccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "AccountCategoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "DefaultPriceLevelId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CustomerSizeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredContactMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "CustomerTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountRatingCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "IndustryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountClassificationCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "BusinessTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OwningBusinessUnit",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OriginatingLeadId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PaymentTermsCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ShippingMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PrimaryContactId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParticipatesInWorkflow",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AccountNumber",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Revenue",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "NumberOfEmployees",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SIC",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnershipCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "MarketCap",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "SharesOutstanding",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TickerSymbol",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "StockExchange",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "WebSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FtpSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPhone",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotFax",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Fax",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Telephone3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreditLimit",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "CreditOnHold",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "IsPrivate",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParentAccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "Aging30",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StateCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging60",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StatusCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging90",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "PreferredAppointmentDayCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredSystemUserId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredAppointmentTimeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Merged",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotSendMM",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MasterId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "LastUsedInCampaign",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PreferredServiceId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredEquipmentId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ExchangeRate",
+                        "type": "decimal",
+                        "precision": 23,
+                        "scale": 10
+                    },
+                    {
+                        "name": "UTCConversionTimeZoneCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OverriddenCreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "TimeZoneRuleVersionNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ImportSequenceNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TransactionCurrencyId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreditLimit_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging30_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Revenue_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging90_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "MarketCap_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging60_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "YomiName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnerId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerIdType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "StageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ProcessId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "EntityImageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "TraversedPath",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OpenDeals",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OpenRevenue_Base",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PrimarySatoriId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ModifiedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PrimaryTwitterId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FollowEmail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MarketingOnly",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "LastOnHoldTime",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OnHoldTime",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TimeSpentByMeOnEmailAndMeetings",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SLAInvokedId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "SLAId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_AppSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_FriendlyName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InquirySMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InstitutionControl",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_InstitutionType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_SearchSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_YieldSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "cdi_accountscore",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "cdi_allowtextmessages",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_CRM2011OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_GenerateCSVFile",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_GeneratePDFReport",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_ParchmentClient",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_fiscalyear",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_behavioralscoringenabled",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_purge",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_instkey",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_StateDoNotCall",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_rnlengagedb",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_enable_p2p_txt",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_enable_thankview",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_key",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_custom_fields",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_department_code",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_campaign_name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_id",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_password",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_username",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_telesense",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_campusespslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_conduitslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_zeemeeslugname",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "fplus",
+                    "table": "em_historical_data_all"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureSynapseAnalyticsTable123')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [
+                    {
+                        "name": "AccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "AccountCategoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "DefaultPriceLevelId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CustomerSizeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredContactMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "CustomerTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountRatingCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "IndustryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountClassificationCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "BusinessTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OwningBusinessUnit",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OriginatingLeadId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PaymentTermsCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ShippingMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PrimaryContactId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParticipatesInWorkflow",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AccountNumber",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Revenue",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "NumberOfEmployees",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SIC",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnershipCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "MarketCap",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "SharesOutstanding",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TickerSymbol",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "StockExchange",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "WebSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FtpSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPhone",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotFax",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Fax",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Telephone3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreditLimit",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "CreditOnHold",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "IsPrivate",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParentAccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "Aging30",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StateCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging60",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StatusCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging90",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "PreferredAppointmentDayCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredSystemUserId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredAppointmentTimeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Merged",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotSendMM",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MasterId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "LastUsedInCampaign",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PreferredServiceId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredEquipmentId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ExchangeRate",
+                        "type": "decimal",
+                        "precision": 23,
+                        "scale": 10
+                    },
+                    {
+                        "name": "UTCConversionTimeZoneCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OverriddenCreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "TimeZoneRuleVersionNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ImportSequenceNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TransactionCurrencyId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreditLimit_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging30_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Revenue_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging90_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "MarketCap_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging60_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "YomiName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnerId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerIdType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "StageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ProcessId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "EntityImageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "TraversedPath",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OpenDeals",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OpenRevenue_Base",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PrimarySatoriId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ModifiedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PrimaryTwitterId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FollowEmail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MarketingOnly",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "LastOnHoldTime",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OnHoldTime",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TimeSpentByMeOnEmailAndMeetings",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SLAInvokedId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "SLAId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_AppSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_FriendlyName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InquirySMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InstitutionControl",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_InstitutionType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_SearchSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_YieldSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "cdi_accountscore",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "cdi_allowtextmessages",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_CRM2011OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_GenerateCSVFile",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_GeneratePDFReport",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_ParchmentClient",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_fiscalyear",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_behavioralscoringenabled",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_purge",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_instkey",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_StateDoNotCall",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_rnlengagedb",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_enable_p2p_txt",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_enable_thankview",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_key",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_custom_fields",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_department_code",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_campaign_name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_id",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_password",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_username",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_telesense",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_campusespslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_conduitslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_zeemeeslugname",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "fplus",
+                    "table": "em_historical_data_all"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureSynapseAnalyticsTable18')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [
+                    {
+                        "name": "AccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "AccountCategoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "DefaultPriceLevelId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CustomerSizeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredContactMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "CustomerTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountRatingCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "IndustryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountClassificationCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "BusinessTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OwningBusinessUnit",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OriginatingLeadId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PaymentTermsCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ShippingMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PrimaryContactId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParticipatesInWorkflow",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AccountNumber",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Revenue",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "NumberOfEmployees",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SIC",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnershipCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "MarketCap",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "SharesOutstanding",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TickerSymbol",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "StockExchange",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "WebSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FtpSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPhone",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotFax",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Fax",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Telephone3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreditLimit",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "CreditOnHold",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "IsPrivate",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParentAccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "Aging30",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StateCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging60",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StatusCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging90",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "PreferredAppointmentDayCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredSystemUserId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredAppointmentTimeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Merged",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotSendMM",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MasterId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "LastUsedInCampaign",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PreferredServiceId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredEquipmentId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ExchangeRate",
+                        "type": "decimal",
+                        "precision": 23,
+                        "scale": 10
+                    },
+                    {
+                        "name": "UTCConversionTimeZoneCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OverriddenCreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "TimeZoneRuleVersionNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ImportSequenceNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TransactionCurrencyId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreditLimit_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging30_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Revenue_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging90_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "MarketCap_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging60_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "YomiName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnerId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerIdType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "StageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ProcessId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "EntityImageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "TraversedPath",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OpenDeals",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OpenRevenue_Base",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PrimarySatoriId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ModifiedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PrimaryTwitterId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FollowEmail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MarketingOnly",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "LastOnHoldTime",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OnHoldTime",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TimeSpentByMeOnEmailAndMeetings",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SLAInvokedId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "SLAId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_AppSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_FriendlyName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InquirySMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InstitutionControl",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_InstitutionType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_SearchSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_YieldSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "cdi_accountscore",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "cdi_allowtextmessages",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_CRM2011OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_GenerateCSVFile",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_GeneratePDFReport",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_ParchmentClient",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_fiscalyear",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_behavioralscoringenabled",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_purge",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_instkey",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_StateDoNotCall",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_rnlengagedb",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_enable_p2p_txt",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_enable_thankview",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_key",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_custom_fields",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_department_code",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_campaign_name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_id",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_password",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_username",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_telesense",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_campusespslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_conduitslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_zeemeeslugname",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "fplus",
+                    "table": "em_historical_data_all"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql152')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_fplus_shared_folder')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_FplusNetworkDrive",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "fplus_host": {
+                            "value": "@dataset().fplus_host",
+                            "type": "Expression"
+                        },
+                        "fplus_username": {
+                            "value": "@dataset().fplus_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "directory": {
+                        "type": "string"
+                    },
+                    "filename": {
+                        "type": "string"
+                    },
+                    "fplus_host": {
+                        "type": "string"
+                    },
+                    "fplus_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "FileServerLocation",
+                        "fileName": {
+                            "value": "@dataset().filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().directory",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "",
+                    "firstRowAsHeader": false,
+                    "quoteChar": ""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crm_parameter11')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "TableName": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": {
+                        "value": "@dataset().TableName",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/RNLSTKDEVSQL1150')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_synapsedqlookupvaluesfplus')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "az_synapse_crm_server": {
+                            "value": "@dataset().az_synapse_crm_server",
+                            "type": "Expression"
+                        },
+                        "az_synapse_crm_db": {
+                            "value": "@dataset().az_synapse_crm_db",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "az_synapse_crm_server": {
+                        "type": "string"
+                    },
+                    "az_synapse_crm_db": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [
+                    {
+                        "name": "LookupValueID",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AccountID",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AccountName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ColumnName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OrganizationValue",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CreatedDate",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "LastUpdatedBy",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "LastUpdatedDate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "fplus",
+                    "table": "DQLookupValues"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ClientGoals')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [
+                    {
+                        "name": "AccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "AccountName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EntryTerm",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AcademicYear",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InqGoal",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AppGoal",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AdmGoal",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EnrGoal",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DepGoal",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CreatedDate",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "LastUpdatedBy",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "LastUpdatedDate",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "fqt",
+                    "table": "ClientGoalDetails"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureSynapseAnalyticsTable1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [
+                    {
+                        "name": "AccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "AccountCategoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "DefaultPriceLevelId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CustomerSizeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredContactMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "CustomerTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountRatingCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "IndustryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountClassificationCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "BusinessTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OwningBusinessUnit",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OriginatingLeadId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PaymentTermsCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ShippingMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PrimaryContactId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParticipatesInWorkflow",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AccountNumber",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Revenue",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "NumberOfEmployees",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SIC",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnershipCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "MarketCap",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "SharesOutstanding",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TickerSymbol",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "StockExchange",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "WebSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FtpSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPhone",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotFax",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Fax",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Telephone3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreditLimit",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "CreditOnHold",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "IsPrivate",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParentAccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "Aging30",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StateCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging60",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StatusCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging90",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "PreferredAppointmentDayCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredSystemUserId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredAppointmentTimeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Merged",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotSendMM",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MasterId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "LastUsedInCampaign",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PreferredServiceId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredEquipmentId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ExchangeRate",
+                        "type": "decimal",
+                        "precision": 23,
+                        "scale": 10
+                    },
+                    {
+                        "name": "UTCConversionTimeZoneCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OverriddenCreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "TimeZoneRuleVersionNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ImportSequenceNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TransactionCurrencyId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreditLimit_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging30_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Revenue_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging90_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "MarketCap_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging60_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "YomiName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnerId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerIdType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "StageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ProcessId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "EntityImageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "TraversedPath",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OpenDeals",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OpenRevenue_Base",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PrimarySatoriId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ModifiedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PrimaryTwitterId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FollowEmail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MarketingOnly",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "LastOnHoldTime",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OnHoldTime",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TimeSpentByMeOnEmailAndMeetings",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SLAInvokedId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "SLAId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_AppSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_FriendlyName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InquirySMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InstitutionControl",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_InstitutionType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_SearchSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_YieldSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "cdi_accountscore",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "cdi_allowtextmessages",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_CRM2011OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_GenerateCSVFile",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_GeneratePDFReport",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_ParchmentClient",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_fiscalyear",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_behavioralscoringenabled",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_purge",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_instkey",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_StateDoNotCall",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_rnlengagedb",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_enable_p2p_txt",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_enable_thankview",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_key",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_custom_fields",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_department_code",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_campaign_name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_id",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_password",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_username",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_telesense",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_campusespslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_conduitslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_zeemeeslugname",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "fplus",
+                    "table": "em_historical_data_all"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureSynapseAnalyticsTable193')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [
+                    {
+                        "name": "AccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "AccountCategoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "DefaultPriceLevelId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CustomerSizeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredContactMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "CustomerTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountRatingCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "IndustryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TerritoryCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "AccountClassificationCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "BusinessTypeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OwningBusinessUnit",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OriginatingLeadId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PaymentTermsCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ShippingMethodCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PrimaryContactId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParticipatesInWorkflow",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AccountNumber",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Revenue",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "NumberOfEmployees",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SIC",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnershipCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "MarketCap",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "SharesOutstanding",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TickerSymbol",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "StockExchange",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "WebSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FtpSiteURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPhone",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotFax",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "Telephone2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Fax",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Telephone3",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DoNotPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkEMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotBulkPostalMail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreditLimit",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "CreditOnHold",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "IsPrivate",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "CreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ParentAccountId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "Aging30",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StateCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging60",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "StatusCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Aging90",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "PreferredAppointmentDayCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PreferredSystemUserId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredAppointmentTimeCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Merged",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DoNotSendMM",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MasterId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "LastUsedInCampaign",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PreferredServiceId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PreferredEquipmentId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ExchangeRate",
+                        "type": "decimal",
+                        "precision": 23,
+                        "scale": 10
+                    },
+                    {
+                        "name": "UTCConversionTimeZoneCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OverriddenCreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "TimeZoneRuleVersionNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ImportSequenceNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TransactionCurrencyId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreditLimit_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging30_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Revenue_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging90_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "MarketCap_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "Aging60_Base",
+                        "type": "money",
+                        "precision": 19,
+                        "scale": 4
+                    },
+                    {
+                        "name": "YomiName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OwnerId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerIdType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "StageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ProcessId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "EntityImageId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "TraversedPath",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OpenDeals",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_State",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OpenRevenue_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OpenRevenue_Base",
+                        "type": "decimal",
+                        "precision": 38,
+                        "scale": 10
+                    },
+                    {
+                        "name": "OpenDeals_Date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "PrimarySatoriId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ModifiedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedByExternalParty",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "PrimaryTwitterId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FollowEmail",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MarketingOnly",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "LastOnHoldTime",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "OnHoldTime",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "TimeSpentByMeOnEmailAndMeetings",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SLAInvokedId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "SLAId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_AppSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_FriendlyName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InquirySMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_InstitutionControl",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_InstitutionType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_SearchSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_YieldSMSURL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "cdi_accountscore",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "cdi_allowtextmessages",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_CRM2011OrgName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_GenerateCSVFile",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_GeneratePDFReport",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_ParchmentClient",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_fiscalyear",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_behavioralscoringenabled",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_purge",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_instkey",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_StateDoNotCall",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_rnlengagedb",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_enable_p2p_txt",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_enable_thankview",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_key",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_api_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_custom_fields",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_p2p_txt_department_code",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_campaign_name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_id",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_client_secret",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_password",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_thankview_sftp_username",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_telesense",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "po_campusespslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_conduitslugname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_zeemeeslugname",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "fplus",
+                    "table": "em_historical_data_all"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql1521')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql1522')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ADS_Enrichment_reference11')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "schema": {
+                        "type": "string"
+                    },
+                    "TableName": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [
+                    {
+                        "name": "source_key",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "FirstName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "LastName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Telephone1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "STUDENTID",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Telephone2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "BirthDate",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "Line1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Line2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "City",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "StateOrProvince",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "PostalCode",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Country",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "address_key",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "county_fips",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "Latitude",
+                        "type": "float",
+                        "precision": 15
+                    },
+                    {
+                        "name": "Longitude",
+                        "type": "float",
+                        "precision": 15
+                    },
+                    {
+                        "name": "ZIP",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "md_flag",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "md_received_date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "pe_flag",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "pe_received_date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "account_id",
+                        "type": "char"
+                    },
+                    {
+                        "name": "accountNumber",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "account_name",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "modified_filename",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().TableName",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DsAzureSQL1431')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_fplus_azuresynapse11')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_fplus_shared_folder21')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_FplusNetworkDrive",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "directory": {
+                        "type": "string"
+                    },
+                    "filename": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "FileServerLocation",
+                        "fileName": {
+                            "value": "@dataset().filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().directory",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "",
+                    "firstRowAsHeader": true,
+                    "quoteChar": ""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_synapse11')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "schema": {
+                        "type": "string"
+                    },
+                    "table_name": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().table_name",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_fplus_shared_folder22')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_FplusNetworkDrive",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "directory": {
+                        "type": "string"
+                    },
+                    "filename": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "FileServerLocation",
+                        "fileName": {
+                            "value": "@dataset().filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().directory",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "",
+                    "firstRowAsHeader": false,
+                    "quoteChar": ""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_ndpdev_mscrm12')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "FQTStudentScoreStg"
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}

@@ -1,0 +1,879 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "RNLADFNDPPROD"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_dynamics_crm')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "Is_Dynamics365",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "EntityName": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DynamicsEntity",
+                "schema": [],
+                "typeProperties": {
+                    "entityName": {
+                        "value": "@dataset().EntityName",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/RNLSTKDEVSQL1152')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/RNLSTKDEVSQL1148')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql9')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ResponseBase17')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_DynamicsCrm",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DynamicsCrmEntity",
+                "schema": [],
+                "typeProperties": {
+                    "entityName": "popb_responses"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Fileuploadmapping148')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_DynamicsCrm",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DynamicsCrmEntity",
+                "schema": [],
+                "typeProperties": {
+                    "entityName": "popb_fileuploadmapping"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crmsynapse')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "az_synapse_crm_server": {
+                            "value": "@dataset().az_synapse_crm_server",
+                            "type": "Expression"
+                        },
+                        "az_synapse_crm_db": {
+                            "value": "@dataset().az_synapse_crm_db",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "Tablename": {
+                        "type": "string"
+                    },
+                    "az_synapse_crm_server": {
+                        "type": "string"
+                    },
+                    "az_synapse_crm_db": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": {
+                        "value": "@dataset().Tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DS_CRM_OnPrem2')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "TableName": {
+                        "type": "string"
+                    },
+                    "Schema": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_synapse_parameter6')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "TableName": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": {
+                        "value": "@dataset().TableName",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crm_Dynamic10')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_RNLMAP_MSCRM",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": "10.200.0.22",
+                        "crm_dbname": "RNLMAP_MSCRM",
+                        "crm_username": " svc_az_ndp",
+                        "vaulturl": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                    }
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    },
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_synapse_Dynamic5')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "Syn_Schema": {
+                        "type": "string"
+                    },
+                    "Syn_Table": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().Syn_Schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().Syn_Table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_appboost_crm')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": {
+                            "value": "@dataset().crm_servername",
+                            "type": "Expression"
+                        },
+                        "crm_dbname": {
+                            "value": "@dataset().crm_dbname",
+                            "type": "Expression"
+                        },
+                        "crm_username": {
+                            "value": "@dataset().crm_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    },
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_uatcrmsynapse_dynamic')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "Tablename": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "bi",
+                    "table": {
+                        "value": "@dataset().Tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_uatcrmsynapse')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "Tablename": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": {
+                        "value": "@dataset().Tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_digitalboost')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "Is_DigitalBoost",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "digitalboost_server": {
+                            "value": "@dataset().digitalboost_server",
+                            "type": "Expression"
+                        },
+                        "digitalboost_db": {
+                            "value": "@dataset().digitalboost_db",
+                            "type": "Expression"
+                        },
+                        "digitalboost_username": {
+                            "value": "@dataset().digitalboost_username",
+                            "type": "Expression"
+                        },
+                        "vault_url": {
+                            "value": "@dataset().vault_url",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "digitalboost_server": {
+                        "type": "string"
+                    },
+                    "digitalboost_db": {
+                        "type": "string"
+                    },
+                    "digitalboost_username": {
+                        "type": "string"
+                    },
+                    "vault_url": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_storedprocedure_uatcrm')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "schema": {
+                        "type": "string"
+                    },
+                    "table": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_ndpdev_mscrm')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "FQTStudentScoreStg"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_fplus_azuresynapse')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "az_synapse_crm_server": {
+                            "value": "@dataset().az_synapse_crm_server",
+                            "type": "Expression"
+                        },
+                        "az_synapse_crm_db": {
+                            "value": "@dataset().az_synapse_crm_db",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    },
+                    "az_synapse_crm_server": {
+                        "type": "string"
+                    },
+                    "az_synapse_crm_db": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ndpdev_mscrm')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [
+                    {
+                        "name": "po_fqtcustomerorderId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerIdType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OwningBusinessUnit",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "statecode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "statuscode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "VersionNumber",
+                        "type": "timestamp"
+                    },
+                    {
+                        "name": "ImportSequenceNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OverriddenCreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "TimeZoneRuleVersionNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "UTCConversionTimeZoneCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_accountmodel",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_orderstatus",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_originalfilesource",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_purpose",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_filequeueid",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_responseId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_account",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_uploaddetailid",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_UploadDetailsIdLookupId",
+                        "type": "uniqueidentifier"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "po_fqtcustomerorderBase"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql12')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}

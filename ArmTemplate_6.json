@@ -1,0 +1,2436 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "RNLADFNDPPROD"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sftp2')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_PartnerIntegration_zeemee_sftp",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "folderName": {
+                        "type": "String"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "SftpLocation",
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sftp1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_PartnerIntegration_zeemee_sftp",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "folderName": {
+                        "type": "String"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "SftpLocation",
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_partner_ndpdev_mscrm1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [
+                    {
+                        "name": "po_fqtcustomerorderId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerIdType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OwningBusinessUnit",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "statecode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "statuscode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "VersionNumber",
+                        "type": "timestamp"
+                    },
+                    {
+                        "name": "ImportSequenceNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OverriddenCreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "TimeZoneRuleVersionNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "UTCConversionTimeZoneCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_accountmodel",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_orderstatus",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_originalfilesource",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_purpose",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_filequeueid",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_responseId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_account",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_uploaddetailid",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_UploadDetailsIdLookupId",
+                        "type": "uniqueidentifier"
+                    }
+                ],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sftp_campusesp')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_PartnerIntgrationCampusESP_SFTP",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "campus_esp_username": {
+                            "value": "@dataset().campus_esp_username",
+                            "type": "Expression"
+                        },
+                        "campuse_esp_host": {
+                            "value": "@dataset().campuse_esp_host",
+                            "type": "Expression"
+                        },
+                        "vault_url": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "folderName": {
+                        "type": "String"
+                    },
+                    "campuse_esp_host": {
+                        "type": "string"
+                    },
+                    "campus_esp_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "SftpLocation",
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_partner_ndpdev_mscrm3')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [
+                    {
+                        "name": "po_fqtcustomerorderId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "CreatedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "ModifiedBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "CreatedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "ModifiedOnBehalfBy",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "OwnerIdType",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OwningBusinessUnit",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "statecode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "statuscode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "VersionNumber",
+                        "type": "timestamp"
+                    },
+                    {
+                        "name": "ImportSequenceNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "OverriddenCreatedOn",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "TimeZoneRuleVersionNumber",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "UTCConversionTimeZoneCode",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "po_name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_accountmodel",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_orderstatus",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_originalfilesource",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_purpose",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_filequeueid",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_responseId",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_account",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "po_uploaddetailid",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "po_UploadDetailsIdLookupId",
+                        "type": "uniqueidentifier"
+                    }
+                ],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_appboostCRM_sql')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": {
+                            "value": "@dataset().crm_servername",
+                            "type": "Expression"
+                        },
+                        "crm_dbname": {
+                            "value": "@dataset().crm_dbname",
+                            "type": "Expression"
+                        },
+                        "crm_username": {
+                            "value": "@dataset().crm_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/RNLSTKDEVSQL1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql1523')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "az_server_name": "rnlndpprodazsql01.database.windows.net",
+                        "az_sql_db": "NDPPRODSQLDB"
+                    }
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/RNLSTKDEVSQL1153')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql18')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DsAzureSQL1312')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql411')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DsAzureSQL1412')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_sql_em_historical1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "ROW_ID",
+                        "type": "bigint",
+                        "precision": 19
+                    },
+                    {
+                        "name": "UNIQUE_ID",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "RESPONSE_ID",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "MAPPING_ID",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "ACCOUNT_NAME",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "SOURCE_FILE_NAME",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "STUDENTID",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "F_NAME",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "M_NAME",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "L_NAME",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ADDRESS1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ADDRESS2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CITY",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "STATE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "COUNTRY",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ZIP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMAIL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "GENDER",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "HOME_PHONE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MOBILE_PHONE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "BIRTH_DT",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_END",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_PUSH",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_PRO",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_PRO",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_INQ",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_INQ",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_APP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_APP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_ADM",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_ADM",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_CON",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_CON",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_ENR",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_ENR",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_CANC",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_CANC",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "APP_CODE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_APP_COMP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_INTERNATIONAL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ISOURCE_CD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FIRSTSOURCEAPP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MAJOR_01_INQ",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DEPT_01_INQ",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MAJOR_01_APP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DEPT_01_APP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MAJOR_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DEPT_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "APP_TYPE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ADMIT_CD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ADMIT_TYPE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "COUNSELOR",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "HS_CODE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "HS_GRAD_YR",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ENTRY_STAT",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ACADEM_LEV",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FULLTIME_PARTTIME",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ENTRY_TERM",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SUBINST_CD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CONVERSION_STAGE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ACT_COMP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SAT_COMP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "HS_GPA",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "RELATION_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_F_NAME_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_L_NAME_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_EMAIL_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_ADDRESS1_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_ADDRESS2_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_CITY_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_STATE_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_ZIP_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_COUNTRY_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_HOME_PHONE_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_MOBILE_PHONE_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "RELATION_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_F_NAME_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_L_NAME_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_EMAIL_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_ADDRESS1_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_ADDRESS2_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_CITY_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_STATE_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_ZIP_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_COUNTRY_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_HOME_PHONE_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_MOBILE_PHONE_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ETHNIC_CD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_ETHNIC",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "RACE_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MAJOR_02_INQ",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DEPT_02_INQ",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MAJOR_02_APP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DEPT_02_APP",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MAJOR_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DEPT_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MARKET_SEG",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "VENDOR",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DENOM_CD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "PREPROFESSIONAL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "INTEREST_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "TRAD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "HOUSING",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CHURCH_CD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "M_STATUS",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MILITARY",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ST_INT_LVL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SITE_CD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SPORT_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "P_GPA",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_ACTSOURCE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ACTMATH",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ACTREADING",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ACTSCIENCE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ACTWRITTEN",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_SATSOURCE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SATREADING",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SATMATH",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DECISION_PLAN",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CONT_SI",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OP_HOUSE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CA_VISIT",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CA_VISIT_DATE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CONT_TI",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OREN_SESS",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_04",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_05",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_06",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_07",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_08",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_09",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_10",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_11",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_12",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_13",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_14",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_15",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_16",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_17",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_18",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_19",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_20",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_21",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_22",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_23",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_24",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_25",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_26",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_27",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_28",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_29",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_30",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_31",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_32",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_33",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_34",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_35",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_36",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_37",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_38",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_39",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_40",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_04",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_05",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_06",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_07",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_08",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_09",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_10",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_11",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_12",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_13",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_14",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_15",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_16",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_17",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_18",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_19",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_20",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_21",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_22",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_23",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_24",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_25",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_26",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_27",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_28",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_29",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_30",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_31",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_32",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_33",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_34",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_35",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_36",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_37",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_38",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_39",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_T_DES_40",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_04",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_05",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_06",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_07",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_08",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_09",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_10",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_04",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_05",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_06",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_07",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_08",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_09",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_D_DES_10",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_04",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_05",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_06",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_07",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_08",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_09",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_10",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_04",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_05",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_06",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_07",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_08",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_09",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "USERDEF_N_DES_10",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ACTENGLISH",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "STUDENTID_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "STUDENTID_TYPE_01",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "STUDENTID_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "STUDENTID_TYPE_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "STUDENTID_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "STUDENTID_TYPE_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_APP_START",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MAJOR_01_GRAD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "INTEREST_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "INTEREST_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SPORT_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SPORT_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "RACE_02",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "RACE_03",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "RACE_04",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "RACE_05",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MAJOR_02_GRAD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "HOME_PHONE_CD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MOBILE_PHONE_CD",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SUFFIX",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FILE_QUEUEID",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MD_AddressKey",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MD_ReceivedDate",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "PacifictEast_Flag_Code",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "PacifictEast_Flag_Name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "PacifictEast_Flag_ID",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "Latitude",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Longitude",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MD_flag_Code",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MD_flag_Name",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MD_flag_ID",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "PAC_EAST_MATCHCODE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "PAC_EAST_VER_CODE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FIRST_GEN",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_WAIT",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_DENY",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_DEFER",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_WAIT",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_DENY",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_DEFER",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CA_VISIT_TYPE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "SMS_ALLOW",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EARLY_ADM",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_INSTATE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "RESIDENCE_HALL",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_ATHLETE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "FLAG_PELL_ELIGIBLE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "DATE_PACKAGED",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "PE_FLAG",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "MD_FLAG",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "DIA_FLAG",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "CRM_ALIGNMENT_FLAG",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "INSERT_DATETIME",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "INSERT_BY",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "MODIFIED_DATETIME",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "MODIFIED_BY",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "modified_filename",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "account_id",
+                        "type": "char"
+                    },
+                    {
+                        "name": "EM_HISTORICAL_FLAG",
+                        "type": "bit"
+                    },
+                    {
+                        "name": "WARNING_CODE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "ERROR_CODE",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "COUNSELOR_EMAIL",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "staging",
+                    "table": "em_historical_data"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql1524')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "az_server_name": "rnlndpprodazsql01.database.windows.net",
+                        "az_sql_db": "NDPPRODSQLDB"
+                    }
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_ndp_crm_Dynamic')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": "10.26.0.22",
+                        "crm_dbname": "RNLMAPQA_MSCRM",
+                        "crm_username": "svc_az_ndp",
+                        "vaulturl": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                    }
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_dsc_crm_Dynamic')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_RNLMAP_MSCRM",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": "10.200.0.22",
+                        "crm_dbname": "RNLMAP_MSCRM",
+                        "crm_username": " svc_az_ndp",
+                        "vaulturl": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                    }
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql1525')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crm_Dynamic')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql1526')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}

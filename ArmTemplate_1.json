@@ -1,0 +1,921 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "RNLADFNDPPROD"
+        },
+        "ls_appboost_dsc_prod_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_appboost_dsc_prod'",
+            "defaultValue": "Integrated Security=False;Data Source=10.200.0.22;Initial Catalog=RNLMAP_MSCRM;User ID=svc_az_ndp"
+        },
+        "ls_PowerBIReporting_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_PowerBIReporting'",
+            "defaultValue": "Integrated Security=False;Data Source=@{linkedService().crm_servername};Initial Catalog=@{linkedService().crm_dbname};User ID=@{linkedService().crm_username}"
+        },
+        "ls_rnlafasmisql_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_rnlafasmisql'",
+            "defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=rnlafasmisql.36de53b57069.database.windows.net;Initial Catalog=RNLAFASPBIDBE"
+        },
+        "ls_AzureSynapseAnalytics_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_AzureSynapseAnalytics'",
+            "defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().az_synapse_em_server};Initial Catalog=@{linkedService().az_synapse_db}"
+        },
+        "ls_AzureSynapseAnalytics1_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_AzureSynapseAnalytics1'",
+            "defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=rnlndpprodemdwsynapse.sql.azuresynapse.net;Initial Catalog=NDPPRODCRMPL1"
+        },
+        "AzureMLServiceprod_servicePrincipalKey": {
+            "type": "secureString",
+            "metadata": "Secure string for 'servicePrincipalKey' of 'AzureMLServiceprod'"
+        },
+        "ls_restapi_Melissa_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://personator.melissadata.net/v3/WEB/ContactVerify"
+        },
+        "ls_Azuredatalakegen2_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://@{linkedService().storageaccountname}.dfs.core.windows.net"
+        },
+        "ls_NDPBlob_properties_typeProperties_serviceEndpoint": {
+            "type": "string",
+            "defaultValue": "https://rnlprodblob.blob.core.windows.net/"
+        },
+        "ls_AzureDataLakeStorage1_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://rnlndpproddls.dfs.core.windows.net/"
+        },
+        "AzureMLServiceprod_properties_typeProperties_subscriptionId": {
+            "type": "string",
+            "defaultValue": "7d860180-93f7-49bd-9ddc-4315ebd5a044"
+        },
+        "AzureMLServiceprod_properties_typeProperties_resourceGroupName": {
+            "type": "string",
+            "defaultValue": "RNLNDPMLPROD"
+        },
+        "AzureMLServiceprod_properties_typeProperties_mlWorkspaceName": {
+            "type": "string",
+            "defaultValue": "RNLNDPMLWSPROD"
+        },
+        "AzureMLServiceprod_properties_typeProperties_servicePrincipalId": {
+            "type": "string",
+            "defaultValue": "4a71a761-482a-4ebc-9aa0-d38a1bd2871e"
+        },
+        "AzureMLServiceprod_properties_typeProperties_tenant": {
+            "type": "string",
+            "defaultValue": "d9fa72a8-0554-450e-b06b-e822956ab212"
+        },
+        "rnlndpproddls_properties_typeProperties_serviceEndpoint": {
+            "type": "string",
+            "defaultValue": "https://rnlndpproddls.blob.core.windows.net/"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_appboost_dsc_prod')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "SqlServer",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_appboost_dsc_prod_connectionString')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                            }
+                        },
+                        "secretName": "CRMSQLDBPWD"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_PowerBIReporting')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "crm_servername": {
+                        "type": "string",
+                        "defaultValue": "10.200.0.23"
+                    },
+                    "crm_dbname": {
+                        "type": "string",
+                        "defaultValue": "PowerBIReporting"
+                    },
+                    "crm_username": {
+                        "type": "string",
+                        "defaultValue": "svc_az_ndp"
+                    },
+                    "vaulturl": {
+                        "type": "string",
+                        "defaultValue": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServer",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_PowerBIReporting_connectionString')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                            }
+                        },
+                        "secretName": "RNLMAPMSCRM-Pwd",
+                        "secretVersion": "7159dccbe87b4cad9a0dd276ada9a99f"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_restapi_Melissa')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "RestService",
+                "typeProperties": {
+                    "url": "[parameters('ls_restapi_Melissa_properties_typeProperties_url')]",
+                    "enableServerCertificateValidation": true,
+                    "authenticationType": "Anonymous"
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_rnlafasmisql')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureSqlDatabase",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_rnlafasmisql_connectionString')]"
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_Azuredatalakegen2')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "storageaccountname": {
+                        "type": "string",
+                        "defaultValue": "rnlndpproddls"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureBlobFS",
+                "typeProperties": {
+                    "url": "[parameters('ls_Azuredatalakegen2_properties_typeProperties_url')]"
+                },
+                "connectVia": {
+                    "referenceName": "AutoResolveIntegrationRuntime",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_AzureSynapseAnalytics')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "az_synapse_em_server": {
+                        "type": "string"
+                    },
+                    "az_synapse_db": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlDW",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_AzureSynapseAnalytics_connectionString')]"
+                },
+                "connectVia": {
+                    "referenceName": "AutoResolveIntegrationRuntime",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_NDPBlob')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureBlobStorage",
+                "typeProperties": {
+                    "serviceEndpoint": "[parameters('ls_NDPBlob_properties_typeProperties_serviceEndpoint')]",
+                    "accountKind": "StorageV2"
+                },
+                "connectVia": {
+                    "referenceName": "AutoResolveIntegrationRuntime",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_AzureDataLakeStorage1')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureBlobFS",
+                "typeProperties": {
+                    "url": "[parameters('ls_AzureDataLakeStorage1_properties_typeProperties_url')]"
+                },
+                "connectVia": {
+                    "referenceName": "AutoResolveIntegrationRuntime",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_AzureSynapseAnalytics1')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureSqlDW",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_AzureSynapseAnalytics1_connectionString')]"
+                },
+                "connectVia": {
+                    "referenceName": "AutoResolveIntegrationRuntime",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureMLServiceprod')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureMLService",
+                "typeProperties": {
+                    "subscriptionId": "[parameters('AzureMLServiceprod_properties_typeProperties_subscriptionId')]",
+                    "resourceGroupName": "[parameters('AzureMLServiceprod_properties_typeProperties_resourceGroupName')]",
+                    "mlWorkspaceName": "[parameters('AzureMLServiceprod_properties_typeProperties_mlWorkspaceName')]",
+                    "servicePrincipalId": "[parameters('AzureMLServiceprod_properties_typeProperties_servicePrincipalId')]",
+                    "servicePrincipalKey": {
+                        "type": "SecureString",
+                        "value": "[parameters('AzureMLServiceprod_servicePrincipalKey')]"
+                    },
+                    "tenant": "[parameters('AzureMLServiceprod_properties_typeProperties_tenant')]"
+                },
+                "connectVia": {
+                    "referenceName": "AutoResolveIntegrationRuntime",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/rnlndpproddls')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureBlobStorage",
+                "typeProperties": {
+                    "serviceEndpoint": "[parameters('rnlndpproddls_properties_typeProperties_serviceEndpoint')]",
+                    "accountKind": "StorageV2"
+                },
+                "connectVia": {
+                    "referenceName": "AutoResolveIntegrationRuntime",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DsAzureSQL143')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ADS_Enrichment_reference1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "az_synapse_crm_server": {
+                            "value": "@dataset().az_synapse_crm_server",
+                            "type": "Expression"
+                        },
+                        "az_synapse_crm_db": {
+                            "value": "@dataset().az_synapse_crm_db",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "schema": {
+                        "type": "string"
+                    },
+                    "TableName": {
+                        "type": "string"
+                    },
+                    "az_synapse_crm_server": {
+                        "type": "string"
+                    },
+                    "az_synapse_crm_db": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [
+                    {
+                        "name": "source_key",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "FirstName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "LastName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Telephone1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "STUDENTID",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "EMailAddress1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Telephone2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "BirthDate",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "Line1",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Line2",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "City",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "StateOrProvince",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "PostalCode",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Country",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "address_key",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "county_fips",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "Latitude",
+                        "type": "float",
+                        "precision": 15
+                    },
+                    {
+                        "name": "Longitude",
+                        "type": "float",
+                        "precision": 15
+                    },
+                    {
+                        "name": "ZIP",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "md_flag",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "md_received_date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "pe_flag",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "pe_received_date",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    },
+                    {
+                        "name": "account_id",
+                        "type": "char"
+                    },
+                    {
+                        "name": "accountNumber",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "account_name",
+                        "type": "varchar"
+                    },
+                    {
+                        "name": "modified_filename",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().TableName",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "az_server_name": {
+                            "value": "@dataset().az_server_name",
+                            "type": "Expression"
+                        },
+                        "az_sql_db": {
+                            "value": "@dataset().az_sql_db",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    },
+                    "az_server_name": {
+                        "type": "string"
+                    },
+                    "az_sql_db": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "DQLookupKey",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "ModelType",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "InputColName",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "OutputColname",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "AutofixRule",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "Description",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForCorrection",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "CodeForFlagUpdate",
+                        "type": "nvarchar"
+                    }
+                ],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_ResponseBase')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_DynamicsCrm",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "DynamicsCrmEntity",
+                "schema": [],
+                "typeProperties": {
+                    "entityName": "popb_responses"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_sftp_folder')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_sftp",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "rnl_sftp_host": {
+                            "value": "@dataset().rnl_sftp_host",
+                            "type": "Expression"
+                        },
+                        "rnl_sftp_username": {
+                            "value": "@dataset().rnl_sftp_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vault_url",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "foldername": {
+                        "type": "string"
+                    },
+                    "rnl_sftp_host": {
+                        "type": "string"
+                    },
+                    "rnl_sftp_username": {
+                        "type": "string"
+                    },
+                    "vault_url": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "SftpLocation",
+                        "folderPath": {
+                            "value": "@dataset().foldername",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": [
+                    {
+                        "name": "F_NAME",
+                        "type": "String"
+                    },
+                    {
+                        "name": "L_NAME",
+                        "type": "String"
+                    },
+                    {
+                        "name": "EMAIL",
+                        "type": "String"
+                    },
+                    {
+                        "name": "MOBILE_PHONE",
+                        "type": "String"
+                    },
+                    {
+                        "name": "PROGRAM",
+                        "type": "String"
+                    },
+                    {
+                        "name": "CAMPUS",
+                        "type": "String"
+                    },
+                    {
+                        "name": "SITE_CD",
+                        "type": "String"
+                    },
+                    {
+                        "name": "ENTRY_TERM",
+                        "type": "String"
+                    },
+                    {
+                        "name": "UTM_SOURCE",
+                        "type": "String"
+                    },
+                    {
+                        "name": "UTM_CAMPAIGN",
+                        "type": "String"
+                    },
+                    {
+                        "name": "UTM_MEDIUM",
+                        "type": "String"
+                    },
+                    {
+                        "name": "UTM_TERM",
+                        "type": "String"
+                    },
+                    {
+                        "name": "UTM_CONTENT",
+                        "type": "String"
+                    },
+                    {
+                        "name": "DATE_CONVERSION",
+                        "type": "String"
+                    },
+                    {
+                        "name": "ADDRESS1",
+                        "type": "String"
+                    },
+                    {
+                        "name": "ADDRESS2",
+                        "type": "String"
+                    },
+                    {
+                        "name": "CITY",
+                        "type": "String"
+                    },
+                    {
+                        "name": "STATE",
+                        "type": "String"
+                    },
+                    {
+                        "name": "ZIP",
+                        "type": "String"
+                    },
+                    {
+                        "name": "BIRTH_DT",
+                        "type": "String"
+                    },
+                    {
+                        "name": "FLAG_ALLOW_SMS",
+                        "type": "String"
+                    },
+                    {
+                        "name": "EDUCATION_INTEREST",
+                        "type": "String"
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_azure_sql151')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_appboostCRM_sql')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": {
+                            "value": "@dataset().crm_servername",
+                            "type": "Expression"
+                        },
+                        "crm_dbname": {
+                            "value": "@dataset().crm_dbname",
+                            "type": "Expression"
+                        },
+                        "crm_username": {
+                            "value": "@dataset().crm_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_sftp_input_file')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_sftp",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "rnl_sftp_host": {
+                            "value": "@dataset().rnl_sftp_host",
+                            "type": "Expression"
+                        },
+                        "rnl_sftp_username": {
+                            "value": "@dataset().rnl_sftp_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "folderName": {
+                        "type": "string"
+                    },
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "rnl_sftp_host": {
+                        "type": "string"
+                    },
+                    "rnl_sftp_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "SftpLocation",
+                        "fileName": {
+                            "value": "@dataset().fileName",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_Fileuploadmapping')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_DynamicsCrm",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "DynamicsCrmEntity",
+                "schema": [],
+                "typeProperties": {
+                    "entityName": "popb_fileuploadmapping"
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}

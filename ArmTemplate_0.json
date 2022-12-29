@@ -1,0 +1,830 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "RNLADFNDPPROD"
+        },
+        "ls_AppboostCrmSqlDB_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_AppboostCrmSqlDB'",
+            "defaultValue": "Integrated Security=False;Data Source=@{linkedService().crm_servername};Initial Catalog=@{linkedService().crm_dbname};User ID=@{linkedService().crm_username}"
+        },
+        "ls_AzureSynapseAnalyticsCrmDB_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_AzureSynapseAnalyticsCrmDB'",
+            "defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().az_synapse_crm_server};Initial Catalog=@{linkedService().az_synapse_crm_db}"
+        },
+        "ls_AzureSqlDB_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_AzureSqlDB'",
+            "defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().az_server_name};Initial Catalog=@{linkedService().az_sql_db}"
+        },
+        "ls_PartnerIntegration_zeemee_sftp_password": {
+            "type": "secureString",
+            "metadata": "Secure string for 'password' of 'ls_PartnerIntegration_zeemee_sftp'"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_passPhrase": {
+            "type": "secureString",
+            "metadata": "Secure string for 'passPhrase' of 'ls_PartnerIntgrationCampusESP_SFTP'"
+        },
+        "Is_DigitalBoost_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'Is_DigitalBoost'",
+            "defaultValue": "Integrated Security=False;Data Source=@{linkedService().digitalboost_server};Initial Catalog=@{linkedService().digitalboost_db};User ID=@{linkedService().digitalboost_username}"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_test_privateKeyContent": {
+            "type": "secureString",
+            "metadata": "Secure string for 'privateKeyContent' of 'ls_PartnerIntgrationCampusESP_SFTP_test'"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_test_passPhrase": {
+            "type": "secureString",
+            "metadata": "Secure string for 'passPhrase' of 'ls_PartnerIntgrationCampusESP_SFTP_test'"
+        },
+        "ls_RNLMAP_MSCRM_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_RNLMAP_MSCRM'",
+            "defaultValue": "Integrated Security=False;Data Source=@{linkedService().crm_servername};Initial Catalog=@{linkedService().crm_dbname};User ID=@{linkedService().crm_username}"
+        },
+        "ls_FQT_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'ls_FQT'",
+            "defaultValue": "Integrated Security=False;Data Source=@{linkedService().servername};Initial Catalog=@{linkedService().dbname};User ID=@{linkedService().username}"
+        },
+        "Is_KeyVault_properties_typeProperties_baseUrl": {
+            "type": "string",
+            "defaultValue": "@{linkedService().VaultUrl}"
+        },
+        "AzureSynapseAnalyticsProdEmDW_properties_privateLinkResourceId": {
+            "type": "string",
+            "defaultValue": "/subscriptions/7d860180-93f7-49bd-9ddc-4315ebd5a044/resourceGroups/RNLNDPPROD/providers/Microsoft.Synapse/workspaces/rnlndpprodemdwsynapse"
+        },
+        "AzureSynapseAnalyticsProdEmDW_properties_groupId": {
+            "type": "string",
+            "defaultValue": "sql"
+        },
+        "AzureSynapseAnalyticsProdEmDW_properties_fqdns": {
+            "type": "array",
+            "defaultValue": [
+                "rnlndpprodemdwsynapse.sql.azuresynapse.net"
+            ]
+        },
+        "AzureDataLakeStorageADFNDPProd_properties_privateLinkResourceId": {
+            "type": "string",
+            "defaultValue": "/subscriptions/7d860180-93f7-49bd-9ddc-4315ebd5a044/resourceGroups/RNLNDPPROD/providers/Microsoft.Storage/storageAccounts/rnlndpproddls"
+        },
+        "AzureDataLakeStorageADFNDPProd_properties_groupId": {
+            "type": "string",
+            "defaultValue": "dfs"
+        },
+        "AzureDataLakeStorageADFNDPProd_properties_fqdns": {
+            "type": "array",
+            "defaultValue": [
+                "rnlndpproddls.dfs.core.windows.net"
+            ]
+        },
+        "ls_sftp_properties_typeProperties_host": {
+            "type": "string",
+            "defaultValue": "@{linkedService().rnl_sftp_host}"
+        },
+        "ls_sftp_properties_typeProperties_userName": {
+            "type": "string",
+            "defaultValue": "@{linkedService().rnl_sftp_username}"
+        },
+        "ls_FplusNetworkDrive_properties_typeProperties_host": {
+            "type": "string",
+            "defaultValue": "@{linkedService().fplus_host}"
+        },
+        "ls_FplusNetworkDrive_properties_typeProperties_userId": {
+            "type": "string",
+            "defaultValue": "@{linkedService().fplus_username}"
+        },
+        "ls_PartnerIntegration_zeemee_sftp_properties_typeProperties_host": {
+            "type": "string",
+            "defaultValue": "@{linkedService().zeemee_host}"
+        },
+        "ls_PartnerIntegration_zeemee_sftp_properties_typeProperties_userName": {
+            "type": "string",
+            "defaultValue": "@{linkedService().zeemee_username}"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_properties_typeProperties_host": {
+            "type": "string",
+            "defaultValue": "@{linkedService().campuse_esp_host}"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_properties_typeProperties_userName": {
+            "type": "string",
+            "defaultValue": "@{linkedService().campus_esp_username}"
+        },
+        "ls_NDPdatabricks_properties_typeProperties_existingClusterId": {
+            "type": "string",
+            "defaultValue": "0714-203005-9conw1v0"
+        },
+        "Is_Dynamics365_properties_typeProperties_username": {
+            "type": "string",
+            "defaultValue": "RUFFALONL\\svcndpprodadfcrm"
+        },
+        "ls_DynamicsCrm_properties_typeProperties_username": {
+            "type": "string",
+            "defaultValue": "RUFFALONL\\svcndpprodadfcrm"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_test_properties_typeProperties_host": {
+            "type": "string",
+            "defaultValue": "ftp.campusesp-test.com"
+        },
+        "ls_PartnerIntgrationCampusESP_SFTP_test_properties_typeProperties_userName": {
+            "type": "string",
+            "defaultValue": "@{linkedService().username}"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/RNLNDPPRODSHIR')]",
+            "type": "Microsoft.DataFactory/factories/integrationRuntimes",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "type": "SelfHosted",
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Is_KeyVault')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "VaultUrl": {
+                        "type": "string",
+                        "defaultValue": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureKeyVault",
+                "typeProperties": {
+                    "baseUrl": "[parameters('Is_KeyVault_properties_typeProperties_baseUrl')]"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/default')]",
+            "type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
+            "apiVersion": "2018-06-01",
+            "properties": {},
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/default/AzureSynapseAnalyticsProdEmDW')]",
+            "type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "privateLinkResourceId": "[parameters('AzureSynapseAnalyticsProdEmDW_properties_privateLinkResourceId')]",
+                "groupId": "[parameters('AzureSynapseAnalyticsProdEmDW_properties_groupId')]",
+                "fqdns": "[parameters('AzureSynapseAnalyticsProdEmDW_properties_fqdns')]"
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/default/AzureDataLakeStorageADFNDPProd')]",
+            "type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "privateLinkResourceId": "[parameters('AzureDataLakeStorageADFNDPProd_properties_privateLinkResourceId')]",
+                "groupId": "[parameters('AzureDataLakeStorageADFNDPProd_properties_groupId')]",
+                "fqdns": "[parameters('AzureDataLakeStorageADFNDPProd_properties_fqdns')]"
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/AutoResolveIntegrationRuntime')]",
+            "type": "Microsoft.DataFactory/factories/integrationRuntimes",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "type": "Managed",
+                "typeProperties": {
+                    "computeProperties": {
+                        "location": "AutoResolve",
+                        "dataFlowProperties": {
+                            "computeType": "General",
+                            "coreCount": 8,
+                            "timeToLive": 0,
+                            "cleanup": true
+                        },
+                        "pipelineExternalComputeScaleProperties": {
+                            "timeToLive": 60
+                        }
+                    }
+                },
+                "managedVirtualNetwork": {
+                    "type": "ManagedVirtualNetworkReference",
+                    "referenceName": "default"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_AppboostCrmSqlDB')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServer",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_AppboostCrmSqlDB_connectionString')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": {
+                                    "value": "@linkedService().vaulturl",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "secretName": "RNLMAPMSCRM-Pwd"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_sftp')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "rnl_sftp_host": {
+                        "type": "string"
+                    },
+                    "rnl_sftp_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "Sftp",
+                "typeProperties": {
+                    "host": "[parameters('ls_sftp_properties_typeProperties_host')]",
+                    "port": 22,
+                    "skipHostKeyValidation": true,
+                    "authenticationType": "Basic",
+                    "userName": "[parameters('ls_sftp_properties_typeProperties_userName')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                            }
+                        },
+                        "secretName": "SFTP-Brillio-rnl"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_FplusNetworkDrive')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "fplus_host": {
+                        "type": "string",
+                        "defaultValue": "\\\\10.3.30.67\\SoftScore"
+                    },
+                    "fplus_username": {
+                        "type": "string",
+                        "defaultValue": "RNLWINSASCOMP1\\svc_prod_fqt"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "FileServer",
+                "typeProperties": {
+                    "host": "[parameters('ls_FplusNetworkDrive_properties_typeProperties_host')]",
+                    "userId": "[parameters('ls_FplusNetworkDrive_properties_typeProperties_userId')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": {
+                                    "value": "@linkedService().vaulturl",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "secretName": "fplus-network-drive-pwd"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_AzureSynapseAnalyticsCrmDB')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "az_synapse_crm_server": {
+                        "type": "string"
+                    },
+                    "az_synapse_crm_db": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlDW",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_AzureSynapseAnalyticsCrmDB_connectionString')]"
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_AzureSqlDB')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "az_server_name": {
+                        "type": "string",
+                        "defaultValue": "rnlndpprodazsql01.database.windows.net"
+                    },
+                    "az_sql_db": {
+                        "type": "string",
+                        "defaultValue": "NDPPRODSQLDB"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureSqlDatabase",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_AzureSqlDB_connectionString')]"
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_PartnerIntegration_zeemee_sftp')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "zeemee_host": {
+                        "type": "string"
+                    },
+                    "zeemee_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "Sftp",
+                "typeProperties": {
+                    "host": "[parameters('ls_PartnerIntegration_zeemee_sftp_properties_typeProperties_host')]",
+                    "port": 22,
+                    "skipHostKeyValidation": true,
+                    "authenticationType": "Basic",
+                    "userName": "[parameters('ls_PartnerIntegration_zeemee_sftp_properties_typeProperties_userName')]",
+                    "password": {
+                        "type": "SecureString",
+                        "value": "[parameters('ls_PartnerIntegration_zeemee_sftp_password')]"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_PartnerIntgrationCampusESP_SFTP')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "campus_esp_username": {
+                        "type": "string"
+                    },
+                    "campuse_esp_host": {
+                        "type": "string"
+                    },
+                    "vault_url": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "Sftp",
+                "typeProperties": {
+                    "host": "[parameters('ls_PartnerIntgrationCampusESP_SFTP_properties_typeProperties_host')]",
+                    "port": 22,
+                    "skipHostKeyValidation": true,
+                    "authenticationType": "SshPublicKey",
+                    "userName": "[parameters('ls_PartnerIntgrationCampusESP_SFTP_properties_typeProperties_userName')]",
+                    "privateKeyContent": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": {
+                                    "value": "@linkedService().vault_url",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "secretName": "campusesp-key"
+                    },
+                    "passPhrase": {
+                        "type": "SecureString",
+                        "value": "[parameters('ls_PartnerIntgrationCampusESP_SFTP_passPhrase')]"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_NDPdatabricks')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "databricks_workspace_url": {
+                        "type": "string"
+                    },
+                    "databricks_clusterid": {
+                        "type": "string"
+                    },
+                    "vault_url": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "AzureDatabricks",
+                "typeProperties": {
+                    "domain": "@linkedService().databricks_workspace_url",
+                    "accessToken": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": {
+                                    "value": "@linkedService().vault_url",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "secretName": "databricks-access-token"
+                    },
+                    "existingClusterId": "[parameters('ls_NDPdatabricks_properties_typeProperties_existingClusterId')]"
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Is_Dynamics365')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "Dynamics",
+                "typeProperties": {
+                    "deploymentType": "OnPremisesWithIfd",
+                    "organizationName": "rnlmap",
+                    "hostName": "rnlmap.crm.ruffalonl.net",
+                    "port": 443,
+                    "authenticationType": "Ifd",
+                    "username": "[parameters('Is_Dynamics365_properties_typeProperties_username')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference"
+                        },
+                        "secretName": "Dynamics365ADF",
+                        "secretVersion": "24d671b3feb4464799393f420ade45ed"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Is_DigitalBoost')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "digitalboost_server": {
+                        "type": "string"
+                    },
+                    "digitalboost_db": {
+                        "type": "string"
+                    },
+                    "digitalboost_username": {
+                        "type": "string"
+                    },
+                    "vault_url": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServer",
+                "typeProperties": {
+                    "connectionString": "[parameters('Is_DigitalBoost_connectionString')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": {
+                                    "value": "@linkedService().vault_url",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "secretName": "DigiitalBoostProd",
+                        "secretVersion": "faf04d23131e4d8597796fefc3ca6f0f"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_DynamicsCrm')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "DynamicsCrm",
+                "typeProperties": {
+                    "deploymentType": "OnPremisesWithIfd",
+                    "organizationName": "rnlmap",
+                    "hostName": "rnlmap.crm.ruffalonl.net",
+                    "port": 443,
+                    "authenticationType": "Ifd",
+                    "username": "[parameters('ls_DynamicsCrm_properties_typeProperties_username')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference"
+                        },
+                        "secretName": "Dynamics365ADF"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_PartnerIntgrationCampusESP_SFTP_test')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "Sftp",
+                "typeProperties": {
+                    "host": "[parameters('ls_PartnerIntgrationCampusESP_SFTP_test_properties_typeProperties_host')]",
+                    "port": 22,
+                    "skipHostKeyValidation": true,
+                    "authenticationType": "SshPublicKey",
+                    "userName": "[parameters('ls_PartnerIntgrationCampusESP_SFTP_test_properties_typeProperties_userName')]",
+                    "privateKeyContent": {
+                        "type": "SecureString",
+                        "value": "[parameters('ls_PartnerIntgrationCampusESP_SFTP_test_privateKeyContent')]"
+                    },
+                    "passPhrase": {
+                        "type": "SecureString",
+                        "value": "[parameters('ls_PartnerIntgrationCampusESP_SFTP_test_passPhrase')]"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_RNLMAP_MSCRM')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "crm_servername": {
+                        "type": "string",
+                        "defaultValue": "10.200.0.22"
+                    },
+                    "crm_dbname": {
+                        "type": "string",
+                        "defaultValue": "RNLMAP_MSCRM"
+                    },
+                    "crm_username": {
+                        "type": "string",
+                        "defaultValue": "svc_az_ndp"
+                    },
+                    "vaulturl": {
+                        "type": "string",
+                        "defaultValue": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServer",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_RNLMAP_MSCRM_connectionString')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": {
+                                    "value": "@linkedService().vaulturl",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "secretName": "RNLMAPMSCRM-Pwd",
+                        "secretVersion": "7159dccbe87b4cad9a0dd276ada9a99f"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ls_FQT')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "parameters": {
+                    "servername": {
+                        "type": "string",
+                        "defaultValue": "10.200.0.53"
+                    },
+                    "dbname": {
+                        "type": "string",
+                        "defaultValue": "FQT_Prod"
+                    },
+                    "username": {
+                        "type": "string",
+                        "defaultValue": "svc_az_ndp"
+                    },
+                    "vaultUrl": {
+                        "type": "string",
+                        "defaultValue": "https://rnlndp-prodkeyvault.vault.azure.net/"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServer",
+                "typeProperties": {
+                    "connectionString": "[parameters('ls_FQT_connectionString')]",
+                    "password": {
+                        "type": "AzureKeyVaultSecret",
+                        "store": {
+                            "referenceName": "Is_KeyVault",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "VaultUrl": {
+                                    "value": "@linkedService().vaultUrl",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "secretName": "FQTpwd",
+                        "secretVersion": "9e3d3397855f4cf5ab8447b7c3cb6bd7"
+                    }
+                },
+                "connectVia": {
+                    "referenceName": "RNLNDPPRODSHIR",
+                    "type": "IntegrationRuntimeReference"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/integrationRuntimes/RNLNDPPRODSHIR')]",
+                "[concat(variables('factoryId'), '/linkedServices/Is_KeyVault')]"
+            ]
+        }
+    ]
+}

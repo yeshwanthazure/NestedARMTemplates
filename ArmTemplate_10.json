@@ -1,0 +1,1001 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "RNLADFNDPPROD"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/FilesToRename15411')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "Containername": {
+                        "type": "string"
+                    },
+                    "Filepath": {
+                        "type": "string"
+                    },
+                    "Filename": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "F+"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().Filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().Filepath",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().Containername",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_FilesToRename')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "storageaccountname": {
+                            "value": "@dataset().storageaccountname",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "Containername": {
+                        "type": "string"
+                    },
+                    "Filepath": {
+                        "type": "string"
+                    },
+                    "Filename": {
+                        "type": "string"
+                    },
+                    "storageaccountname": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().Filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().Filepath",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().Containername",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_getFilesBlob')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_NDPBlob",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "responseId": {
+                        "type": "string"
+                    },
+                    "filename": {
+                        "type": "string"
+                    },
+                    "blobname": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobStorageLocation",
+                        "fileName": {
+                            "value": "@dataset().filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().responseId",
+                            "type": "Expression"
+                        },
+                        "container": {
+                            "value": "@dataset().responseId",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/FilesToRename141')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "Containername": {
+                        "type": "string"
+                    },
+                    "Filepath": {
+                        "type": "string"
+                    },
+                    "Filename": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().Filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().Filepath",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().Containername",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_adls_output')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "storageaccountname": {
+                            "value": "@dataset().storageaccountname",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "FilePath": {
+                        "type": "string"
+                    },
+                    "FileName": {
+                        "type": "string"
+                    },
+                    "storageaccountname": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().FileName",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().FilePath",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_adls_em_historical_param1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "container": {
+                        "type": "string"
+                    },
+                    "file_path": {
+                        "type": "string"
+                    },
+                    "file_name": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().file_name",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().file_path",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().container",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_dnc_file_csv')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "storageaccountname": {
+                            "value": "@dataset().storageaccountname",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "container_name": {
+                        "type": "string"
+                    },
+                    "folder_name": {
+                        "type": "string"
+                    },
+                    "file_name": {
+                        "type": "string"
+                    },
+                    "storageaccountname": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().file_name",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().folder_name",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().container_name",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_dnc_file_csv1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "container_name": {
+                        "type": "string"
+                    },
+                    "folder_name": {
+                        "type": "string"
+                    },
+                    "file_name": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().file_name",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().folder_name",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().container_name",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_adls')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "storageaccountname": {
+                            "value": "@dataset().storageaccountname",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "folderName": {
+                        "type": "string"
+                    },
+                    "storageaccountname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_synapse')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalytics",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "az_synapse_em_server": {
+                            "value": "@dataset().az_synapse_em_server",
+                            "type": "Expression"
+                        },
+                        "az_synapse_db": {
+                            "value": "@dataset().az_synapse_db",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    },
+                    "az_synapse_em_server": {
+                        "type": "string"
+                    },
+                    "az_synapse_db": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sourcefile_zeemee')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "storageaccountname": {
+                            "value": "@dataset().storageaccountname",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "FilePath": {
+                        "type": "string"
+                    },
+                    "Filename": {
+                        "type": "string"
+                    },
+                    "storageaccountname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().Filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().FilePath",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sourcefile_zeemee1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "FilePath": {
+                        "type": "string"
+                    },
+                    "Filename": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().Filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().FilePath",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sourcefile_zeemee2')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "FilePath": {
+                        "type": "string"
+                    },
+                    "Filename": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().Filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().FilePath",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_adls1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "folderName": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_adls2')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "folderName": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_synapse1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalytics",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_synapse2')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AzureSynapseAnalytics",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "tablename": {
+                        "type": "string"
+                    },
+                    "schemaname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "AzureSqlDWTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().schemaname",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().tablename",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sourcefile_zeemee3')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "FilePath": {
+                        "type": "string"
+                    },
+                    "Filename": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().Filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().FilePath",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sourcefile_campusesp')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "storageaccountname": {
+                            "value": "@dataset().storageaccountname",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "FilePath": {
+                        "type": "string"
+                    },
+                    "Filename": {
+                        "type": "string"
+                    },
+                    "storageaccountname": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "fileName": {
+                            "value": "@dataset().Filename",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().FilePath",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_adls3')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_Azuredatalakegen2",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "ContainerName": {
+                        "type": "string"
+                    },
+                    "folderName": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Test"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "AzureBlobFSLocation",
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        },
+                        "fileSystem": {
+                            "value": "@dataset().ContainerName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        }
+    ]
+}

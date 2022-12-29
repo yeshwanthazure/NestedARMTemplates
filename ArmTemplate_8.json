@@ -1,0 +1,2376 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "RNLADFNDPPROD"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sftp_campusesp1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_PartnerIntgrationCampusESP_SFTP",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "folderName": {
+                        "type": "String"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "SftpLocation",
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crm_Dynamic9')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_RNLMAP_MSCRM",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_entity_application21')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_DynamicsCrm",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DynamicsCrmEntity",
+                "schema": [],
+                "typeProperties": {
+                    "entityName": "po_application"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crm_Dynamic81')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference"
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sftp11')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_PartnerIntegration_zeemee_sftp",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "zeemee_host": {
+                            "value": "@dataset().zeemee_host",
+                            "type": "Expression"
+                        },
+                        "zeemee_username": {
+                            "value": "@dataset().zeemee_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "folderName": {
+                        "type": "String"
+                    },
+                    "zeemee_host": {
+                        "type": "string"
+                    },
+                    "zeemee_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "SftpLocation",
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_entity_contact1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_DynamicsCrm",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DynamicsCrmEntity",
+                "schema": [],
+                "typeProperties": {
+                    "entityName": "contact"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_entity_id1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_DynamicsCrm",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DynamicsCrmEntity",
+                "schema": [],
+                "typeProperties": {
+                    "entityName": "po_id"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/RNLSTKDEVSQL1144')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": {
+                            "value": "@dataset().crm_servername",
+                            "type": "Expression"
+                        },
+                        "crm_dbname": {
+                            "value": "@dataset().crm_dbname",
+                            "type": "Expression"
+                        },
+                        "crm_username": {
+                            "value": "@dataset().crm_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {}
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crm_Dynamic3')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": {
+                            "value": "@dataset().crm_servername",
+                            "type": "Expression"
+                        },
+                        "crm_dbname": {
+                            "value": "@dataset().crm_dbname",
+                            "type": "Expression"
+                        },
+                        "crm_username": {
+                            "value": "@dataset().crm_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    },
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_entity_application1')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_DynamicsCrm",
+                    "type": "LinkedServiceReference"
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DynamicsCrmEntity",
+                "schema": [],
+                "typeProperties": {
+                    "entityName": "po_application"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crm_Dynamic7')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": {
+                            "value": "@dataset().crm_servername",
+                            "type": "Expression"
+                        },
+                        "crm_dbname": {
+                            "value": "@dataset().crm_dbname",
+                            "type": "Expression"
+                        },
+                        "crm_username": {
+                            "value": "@dataset().crm_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    },
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crm_Dynamic5')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": {
+                            "value": "@dataset().crm_servername",
+                            "type": "Expression"
+                        },
+                        "crm_dbname": {
+                            "value": "@dataset().crm_dbname",
+                            "type": "Expression"
+                        },
+                        "crm_username": {
+                            "value": "@dataset().crm_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    },
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_crm_Dynamic82')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_AppboostCrmSqlDB",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "crm_servername": {
+                            "value": "@dataset().crm_servername",
+                            "type": "Expression"
+                        },
+                        "crm_dbname": {
+                            "value": "@dataset().crm_dbname",
+                            "type": "Expression"
+                        },
+                        "crm_username": {
+                            "value": "@dataset().crm_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "crm_schema": {
+                        "type": "string"
+                    },
+                    "crm_table": {
+                        "type": "string"
+                    },
+                    "crm_servername": {
+                        "type": "string"
+                    },
+                    "crm_dbname": {
+                        "type": "string"
+                    },
+                    "crm_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "annotations": [],
+                "type": "SqlServerTable",
+                "schema": [],
+                "typeProperties": {
+                    "schema": {
+                        "value": "@dataset().crm_schema",
+                        "type": "Expression"
+                    },
+                    "table": {
+                        "value": "@dataset().crm_table",
+                        "type": "Expression"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/ds_pi_sftp_outbound')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "ls_PartnerIntegration_zeemee_sftp",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "zeemee_host": {
+                            "value": "@dataset().zeemee_host",
+                            "type": "Expression"
+                        },
+                        "zeemee_username": {
+                            "value": "@dataset().zeemee_username",
+                            "type": "Expression"
+                        },
+                        "vaulturl": {
+                            "value": "@dataset().vaulturl",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "parameters": {
+                    "folderName": {
+                        "type": "String"
+                    },
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "zeemee_host": {
+                        "type": "string"
+                    },
+                    "zeemee_username": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "partner-Integration"
+                },
+                "annotations": [],
+                "type": "DelimitedText",
+                "typeProperties": {
+                    "location": {
+                        "type": "SftpLocation",
+                        "fileName": {
+                            "value": "@dataset().fileName",
+                            "type": "Expression"
+                        },
+                        "folderPath": {
+                            "value": "@dataset().folderName",
+                            "type": "Expression"
+                        }
+                    },
+                    "columnDelimiter": ",",
+                    "escapeChar": "\\",
+                    "firstRowAsHeader": true,
+                    "quoteChar": "\""
+                },
+                "schema": []
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/pip_DIA_Bulk_Update')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "description": "Updating the data from grid screen",
+                "activities": [
+                    {
+                        "name": "Log Execution Detail - Start",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Log_DIA_Operation_Status]",
+                            "storedProcedureParameters": {
+                                "Column_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Update_Column",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "DIA_Operation": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Operation",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Modified_FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Status": {
+                                    "value": "In Progress",
+                                    "type": "String"
+                                },
+                                "Pipeline_Name": {
+                                    "value": {
+                                        "value": "@pipeline().Pipeline",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Pipeline_Run_Id": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    },
+                    {
+                        "name": "Log Execution Detail Success",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "SP- Bulk Update",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Log_DIA_Operation_Status]",
+                            "storedProcedureParameters": {
+                                "DIA_Operation": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Operation",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Modified_FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Status": {
+                                    "value": "Success",
+                                    "type": "String"
+                                },
+                                "Pipeline_Name": {
+                                    "value": {
+                                        "value": "@pipeline().Pipeline",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Pipeline_Run_Id": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Column_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Update_Column",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    },
+                    {
+                        "name": "Log Execution Detail_Fail",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "SP- Bulk Update",
+                                "dependencyConditions": [
+                                    "Failed"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Log_DIA_Operation_Status]",
+                            "storedProcedureParameters": {
+                                "DIA_Operation": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Operation",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Modified_FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Status": {
+                                    "value": "Failed",
+                                    "type": "String"
+                                },
+                                "Pipeline_Name": {
+                                    "value": {
+                                        "value": "@pipeline().Pipeline",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Pipeline_Run_Id": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Column_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Update_Column",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    },
+                    {
+                        "name": "SP- Bulk Update",
+                        "description": "Update the data for selected values and filters",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "Log Execution Detail - Start",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Bulk_Update]",
+                            "storedProcedureParameters": {
+                                "FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Filter_Column": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Filter_Column",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Filter_Value": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Filter_Value",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "New_Value": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.New_Value",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Old_Value": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Old_Value",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Operation": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Operation",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Table_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Table_Name",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Update_Column": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Update_Column",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {},
+                    "cancelAfter": {}
+                },
+                "parameters": {
+                    "Table_Name": {
+                        "type": "string"
+                    },
+                    "FileName": {
+                        "type": "string"
+                    },
+                    "Filter_Column": {
+                        "type": "string"
+                    },
+                    "Filter_Value": {
+                        "type": "string"
+                    },
+                    "Update_Column": {
+                        "type": "string"
+                    },
+                    "Old_Value": {
+                        "type": "string"
+                    },
+                    "New_Value": {
+                        "type": "string"
+                    },
+                    "Operation": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "DIA"
+                },
+                "annotations": [],
+                "lastPublishTime": "2022-07-28T11:54:08Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/pip_DIA_Remove_Errors_Warnings')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "description": "SP to remove error code and warning code from DIA interface",
+                "activities": [
+                    {
+                        "name": "Log Execution Detail - Start",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Log_DIA_Operation_Status]",
+                            "storedProcedureParameters": {
+                                "Column_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Column_Name",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "DIA_Operation": {
+                                    "value": {
+                                        "value": "@if(equals(pipeline().parameters.Code_Type,'ERROR_CODE'),'Remove Error', 'Remove Warning')",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Modified_FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Modified_FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Status": {
+                                    "value": "In Progress",
+                                    "type": "String"
+                                },
+                                "Pipeline_Name": {
+                                    "value": {
+                                        "value": "@pipeline().Pipeline",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Pipeline_Run_Id": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    },
+                    {
+                        "name": "Log Execution Detail Success",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "SP- Remove Errors Warnings",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Log_DIA_Operation_Status]",
+                            "storedProcedureParameters": {
+                                "DIA_Operation": {
+                                    "value": {
+                                        "value": "@if(equals(pipeline().parameters.Code_Type,'ERROR_CODE'),'Remove Error', 'Remove Warning')",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Modified_FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Modified_FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Status": {
+                                    "value": "Success",
+                                    "type": "String"
+                                },
+                                "Pipeline_Name": {
+                                    "value": {
+                                        "value": "@pipeline().Pipeline",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Pipeline_Run_Id": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Column_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Column_Name",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    },
+                    {
+                        "name": "Log Execution Detail_Fail",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "SP- Remove Errors Warnings",
+                                "dependencyConditions": [
+                                    "Failed"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Log_DIA_Operation_Status]",
+                            "storedProcedureParameters": {
+                                "DIA_Operation": {
+                                    "value": {
+                                        "value": "@if(equals(pipeline().parameters.Code_Type,'ERROR_CODE'),'Remove Error', 'Remove Warning')",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Modified_FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Modified_FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Status": {
+                                    "value": "Failed",
+                                    "type": "String"
+                                },
+                                "Pipeline_Name": {
+                                    "value": {
+                                        "value": "@pipeline().Pipeline",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Pipeline_Run_Id": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Column_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Column_Name",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    },
+                    {
+                        "name": "SP- Remove Errors Warnings",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "Log Execution Detail - Start",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Remove_Error_Warning_Code]",
+                            "storedProcedureParameters": {
+                                "Code": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Code",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Code_Type": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Code_Type",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Column_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Column_Name",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "DIA_USER": {
+                                    "value": {
+                                        "value": "@pipeline().TriggerName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Modified_FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Purpose_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Purpose_Name",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Table_Name": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Table_Name",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {},
+                    "cancelAfter": {}
+                },
+                "parameters": {
+                    "Table_Name": {
+                        "type": "string"
+                    },
+                    "Purpose_Name": {
+                        "type": "string"
+                    },
+                    "Modified_FileName": {
+                        "type": "string"
+                    },
+                    "Column_Name": {
+                        "type": "string"
+                    },
+                    "Code_Type": {
+                        "type": "string"
+                    },
+                    "Code": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "DIA"
+                },
+                "annotations": [],
+                "lastPublishTime": "2022-07-28T11:54:08Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Pip_DIA_Publish')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "description": "Publish the DIA changes from temp table to main table",
+                "activities": [
+                    {
+                        "name": "Log Execution Detail - Start",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Log_DIA_Operation_Status]",
+                            "storedProcedureParameters": {
+                                "DIA_Operation": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.DIA_Operation",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Modified_FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Modified_FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Status": {
+                                    "value": "In Progress",
+                                    "type": "String"
+                                },
+                                "Pipeline_Name": {
+                                    "value": {
+                                        "value": "@pipeline().Pipeline",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Pipeline_Run_Id": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Column_Name": {
+                                    "value": "NA",
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    },
+                    {
+                        "name": "Switch on Purpose",
+                        "type": "Switch",
+                        "dependsOn": [
+                            {
+                                "activity": "Log Execution Detail - Start",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "userProperties": [],
+                        "typeProperties": {
+                            "on": {
+                                "value": "@pipeline().parameters.Table_Name",
+                                "type": "Expression"
+                            },
+                            "cases": [
+                                {
+                                    "value": "em_scoring",
+                                    "activities": [
+                                        {
+                                            "name": "Publish - EM Scoring",
+                                            "type": "SqlServerStoredProcedure",
+                                            "dependsOn": [],
+                                            "policy": {
+                                                "timeout": "7.00:00:00",
+                                                "retry": 0,
+                                                "retryIntervalInSeconds": 30,
+                                                "secureOutput": false,
+                                                "secureInput": false
+                                            },
+                                            "userProperties": [],
+                                            "typeProperties": {
+                                                "storedProcedureName": "[[dia].[usp_EM_Scoring_intermediate_load]",
+                                                "storedProcedureParameters": {
+                                                    "DIA_USER": {
+                                                        "value": {
+                                                            "value": "@pipeline().TriggerTime",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "FileName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Modified_FileName",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "OperationType": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.DIA_Operation",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "TableName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Table_Name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    }
+                                                }
+                                            },
+                                            "linkedServiceName": {
+                                                "referenceName": "ls_AzureSqlDB",
+                                                "type": "LinkedServiceReference"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "em_marketing",
+                                    "activities": [
+                                        {
+                                            "name": "Publish - EM Marketing",
+                                            "type": "SqlServerStoredProcedure",
+                                            "dependsOn": [],
+                                            "policy": {
+                                                "timeout": "7.00:00:00",
+                                                "retry": 0,
+                                                "retryIntervalInSeconds": 30,
+                                                "secureOutput": false,
+                                                "secureInput": false
+                                            },
+                                            "userProperties": [],
+                                            "typeProperties": {
+                                                "storedProcedureName": "[[dia].[usp_EM_Marketing_intermediate_load]",
+                                                "storedProcedureParameters": {
+                                                    "DIA_USER": {
+                                                        "value": "DIA User",
+                                                        "type": "String"
+                                                    },
+                                                    "FileName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Modified_FileName",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "OperationType": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.DIA_Operation",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "TableName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Table_Name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    }
+                                                }
+                                            },
+                                            "linkedServiceName": {
+                                                "referenceName": "ls_AzureSqlDB",
+                                                "type": "LinkedServiceReference"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "em_aog",
+                                    "activities": [
+                                        {
+                                            "name": "Publish - EM AOG",
+                                            "type": "SqlServerStoredProcedure",
+                                            "dependsOn": [],
+                                            "policy": {
+                                                "timeout": "7.00:00:00",
+                                                "retry": 0,
+                                                "retryIntervalInSeconds": 30,
+                                                "secureOutput": false,
+                                                "secureInput": false
+                                            },
+                                            "userProperties": [],
+                                            "typeProperties": {
+                                                "storedProcedureName": "[[dia].[usp_EM_Aog_intermediate_load]",
+                                                "storedProcedureParameters": {
+                                                    "DIA_USER": {
+                                                        "value": "DIA User",
+                                                        "type": "String"
+                                                    },
+                                                    "FileName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Modified_FileName",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "OperationType": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.DIA_Operation",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "TableName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Table_Name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    }
+                                                }
+                                            },
+                                            "linkedServiceName": {
+                                                "referenceName": "ls_AzureSqlDB",
+                                                "type": "LinkedServiceReference"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "em_search_vendor_data",
+                                    "activities": [
+                                        {
+                                            "name": "Publish - EM Search Vendor Data",
+                                            "type": "SqlServerStoredProcedure",
+                                            "dependsOn": [],
+                                            "policy": {
+                                                "timeout": "7.00:00:00",
+                                                "retry": 0,
+                                                "retryIntervalInSeconds": 30,
+                                                "secureOutput": false,
+                                                "secureInput": false
+                                            },
+                                            "userProperties": [],
+                                            "typeProperties": {
+                                                "storedProcedureName": "[[dia].[usp_EM_search_vendor_data_intermediate_load]",
+                                                "storedProcedureParameters": {
+                                                    "DIA_USER": {
+                                                        "value": "DIA User",
+                                                        "type": "String"
+                                                    },
+                                                    "FileName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Modified_FileName",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "OperationType": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.DIA_Operation",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "TableName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Table_Name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    }
+                                                }
+                                            },
+                                            "linkedServiceName": {
+                                                "referenceName": "ls_AzureSqlDB",
+                                                "type": "LinkedServiceReference"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "em_suppression",
+                                    "activities": [
+                                        {
+                                            "name": "Publish - EM Suppression",
+                                            "type": "SqlServerStoredProcedure",
+                                            "dependsOn": [],
+                                            "policy": {
+                                                "timeout": "7.00:00:00",
+                                                "retry": 0,
+                                                "retryIntervalInSeconds": 30,
+                                                "secureOutput": false,
+                                                "secureInput": false
+                                            },
+                                            "userProperties": [],
+                                            "typeProperties": {
+                                                "storedProcedureName": "[[dia].[usp_EM_Suppression_intermediate_load]",
+                                                "storedProcedureParameters": {
+                                                    "DIA_USER": {
+                                                        "value": "DIA User",
+                                                        "type": "String"
+                                                    },
+                                                    "FileName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Modified_FileName",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "OperationType": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.DIA_Operation",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    },
+                                                    "TableName": {
+                                                        "value": {
+                                                            "value": "@pipeline().parameters.Table_Name",
+                                                            "type": "Expression"
+                                                        },
+                                                        "type": "String"
+                                                    }
+                                                }
+                                            },
+                                            "linkedServiceName": {
+                                                "referenceName": "ls_AzureSqlDB",
+                                                "type": "LinkedServiceReference"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "Log Execution Detail Success",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "Switch on Purpose",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Log_DIA_Operation_Status]",
+                            "storedProcedureParameters": {
+                                "DIA_Operation": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.DIA_Operation",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Modified_FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Modified_FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Status": {
+                                    "value": "Success",
+                                    "type": "String"
+                                },
+                                "Pipeline_Name": {
+                                    "value": {
+                                        "value": "@pipeline().Pipeline",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Pipeline_Run_Id": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Column_Name": {
+                                    "value": "NA",
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    },
+                    {
+                        "name": "Log Execution Detail_Fail",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "Switch on Purpose",
+                                "dependencyConditions": [
+                                    "Failed"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dia].[usp_Log_DIA_Operation_Status]",
+                            "storedProcedureParameters": {
+                                "DIA_Operation": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.DIA_Operation",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Modified_FileName": {
+                                    "value": {
+                                        "value": "@pipeline().parameters.Modified_FileName",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "In_Status": {
+                                    "value": "Failed",
+                                    "type": "String"
+                                },
+                                "Pipeline_Name": {
+                                    "value": {
+                                        "value": "@pipeline().Pipeline",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Pipeline_Run_Id": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "String"
+                                },
+                                "Column_Name": {
+                                    "value": "NA",
+                                    "type": "String"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSqlDB",
+                            "type": "LinkedServiceReference"
+                        }
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {},
+                    "cancelAfter": {}
+                },
+                "parameters": {
+                    "Modified_FileName": {
+                        "type": "string"
+                    },
+                    "DIA_Operation": {
+                        "type": "string"
+                    },
+                    "Table_Name": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "DIA"
+                },
+                "annotations": [],
+                "lastPublishTime": "2022-07-28T11:54:08Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/pip-insert-crm-ads-crm-data-profiling-log')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Data_Profiling_CRM_ADS_CRM",
+                        "type": "Switch",
+                        "dependsOn": [],
+                        "userProperties": [],
+                        "typeProperties": {
+                            "on": {
+                                "value": "@pipeline().parameters.log_type",
+                                "type": "Expression"
+                            },
+                            "cases": [
+                                {
+                                    "value": "CRM_to_ADS",
+                                    "activities": [
+                                        {
+                                            "name": "Data_Profiling_CRM_ADS",
+                                            "description": "starting ETL audit",
+                                            "type": "DatabricksNotebook",
+                                            "dependsOn": [],
+                                            "policy": {
+                                                "timeout": "7.00:00:00",
+                                                "retry": 0,
+                                                "retryIntervalInSeconds": 30,
+                                                "secureOutput": false,
+                                                "secureInput": false
+                                            },
+                                            "userProperties": [],
+                                            "typeProperties": {
+                                                "notebookPath": "/audit-Framework/dbn-etl-data-profiling-log",
+                                                "baseParameters": {
+                                                    "data_flow": {
+                                                        "value": "@pipeline().parameters.data_flow",
+                                                        "type": "Expression"
+                                                    },
+                                                    "adf_run_id": {
+                                                        "value": "@pipeline().parameters.adf_run_id",
+                                                        "type": "Expression"
+                                                    },
+                                                    "source_table_name": {
+                                                        "value": "@pipeline().parameters.source_table_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "target_table_name": {
+                                                        "value": "@pipeline().parameters.target_table_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "source_row_count": {
+                                                        "value": "@pipeline().parameters.source_row_count",
+                                                        "type": "Expression"
+                                                    },
+                                                    "database_name": {
+                                                        "value": "@pipeline().parameters.database_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "server_name": {
+                                                        "value": "@pipeline().parameters.database_server_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "target_row_count": {
+                                                        "value": "@pipeline().parameters.target_row_count",
+                                                        "type": "Expression"
+                                                    },
+                                                    "rejected_rows": {
+                                                        "value": "@pipeline().parameters.rejected_rows",
+                                                        "type": "Expression"
+                                                    },
+                                                    "load_start_datetime": {
+                                                        "value": "@pipeline().parameters.load_start_date",
+                                                        "type": "Expression"
+                                                    },
+                                                    "load_end_datetime": {
+                                                        "value": "@pipeline().parameters.load_end_date",
+                                                        "type": "Expression"
+                                                    }
+                                                }
+                                            },
+                                            "linkedServiceName": {
+                                                "referenceName": "ls_NDPdatabricks",
+                                                "type": "LinkedServiceReference",
+                                                "parameters": {
+                                                    "databricks_workspace_url": {
+                                                        "value": "@pipeline().parameters.databricks_workspace_url",
+                                                        "type": "Expression"
+                                                    },
+                                                    "databricks_clusterid": {
+                                                        "value": "@pipeline().parameters.databricks_clusterid",
+                                                        "type": "Expression"
+                                                    },
+                                                    "vault_url": {
+                                                        "value": "@pipeline().parameters.vaulturl",
+                                                        "type": "Expression"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "ADS_to_CRM",
+                                    "activities": [
+                                        {
+                                            "name": "Data_Profiling_ADS_CRM",
+                                            "description": "starting ETL audit",
+                                            "type": "DatabricksNotebook",
+                                            "dependsOn": [],
+                                            "policy": {
+                                                "timeout": "7.00:00:00",
+                                                "retry": 0,
+                                                "retryIntervalInSeconds": 30,
+                                                "secureOutput": false,
+                                                "secureInput": false
+                                            },
+                                            "userProperties": [],
+                                            "typeProperties": {
+                                                "notebookPath": "/audit-Framework/dbn-etl-data-profiling-log",
+                                                "baseParameters": {
+                                                    "data_flow": {
+                                                        "value": "@pipeline().parameters.data_flow",
+                                                        "type": "Expression"
+                                                    },
+                                                    "adf_run_id": {
+                                                        "value": "@pipeline().parameters.adf_run_id",
+                                                        "type": "Expression"
+                                                    },
+                                                    "source_table_name": {
+                                                        "value": "@pipeline().parameters.source_table_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "target_table_name": {
+                                                        "value": "@pipeline().parameters.target_table_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "source_row_count": {
+                                                        "value": "@pipeline().parameters.source_row_count",
+                                                        "type": "Expression"
+                                                    },
+                                                    "database_name": {
+                                                        "value": "@pipeline().parameters.database_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "server_name": {
+                                                        "value": "@pipeline().parameters.database_server_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "target_row_count": {
+                                                        "value": "@pipeline().parameters.target_row_count",
+                                                        "type": "Expression"
+                                                    },
+                                                    "rejected_rows": {
+                                                        "value": "@pipeline().parameters.rejected_rows",
+                                                        "type": "Expression"
+                                                    },
+                                                    "load_start_datetime": {
+                                                        "value": "@pipeline().parameters.load_start_date",
+                                                        "type": "Expression"
+                                                    },
+                                                    "load_end_datetime": {
+                                                        "value": "@pipeline().parameters.load_end_date",
+                                                        "type": "Expression"
+                                                    }
+                                                }
+                                            },
+                                            "linkedServiceName": {
+                                                "referenceName": "ls_NDPdatabricks",
+                                                "type": "LinkedServiceReference",
+                                                "parameters": {
+                                                    "databricks_workspace_url": {
+                                                        "value": "@pipeline().parameters.databricks_workspace_url",
+                                                        "type": "Expression"
+                                                    },
+                                                    "databricks_clusterid": {
+                                                        "value": "@pipeline().parameters.databricks_clusterid",
+                                                        "type": "Expression"
+                                                    },
+                                                    "vault_url": {
+                                                        "value": "@pipeline().parameters.vaulturl",
+                                                        "type": "Expression"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {},
+                    "cancelAfter": {}
+                },
+                "parameters": {
+                    "log_type": {
+                        "type": "string"
+                    },
+                    "data_flow": {
+                        "type": "string"
+                    },
+                    "adf_run_id": {
+                        "type": "string"
+                    },
+                    "source_table_name": {
+                        "type": "string"
+                    },
+                    "target_table_name": {
+                        "type": "string"
+                    },
+                    "source_row_count": {
+                        "type": "string"
+                    },
+                    "target_row_count": {
+                        "type": "string"
+                    },
+                    "rejected_rows": {
+                        "type": "string"
+                    },
+                    "database_server_name": {
+                        "type": "string"
+                    },
+                    "database_name": {
+                        "type": "string"
+                    },
+                    "load_start_date": {
+                        "type": "string"
+                    },
+                    "load_end_date": {
+                        "type": "string"
+                    },
+                    "databricks_workspace_url": {
+                        "type": "string"
+                    },
+                    "databricks_clusterid": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Audit"
+                },
+                "annotations": [],
+                "lastPublishTime": "2022-07-29T17:44:15Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/pip-insert-crm-ads-crm-data-profiling-log1')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Data_Profiling_CRM_ADS_CRM",
+                        "type": "Switch",
+                        "dependsOn": [],
+                        "userProperties": [],
+                        "typeProperties": {
+                            "on": {
+                                "value": "@pipeline().parameters.log_type",
+                                "type": "Expression"
+                            },
+                            "cases": [
+                                {
+                                    "value": "CRM_to_ADS",
+                                    "activities": [
+                                        {
+                                            "name": "Data_Profiling_CRM_ADS",
+                                            "description": "starting ETL audit",
+                                            "type": "DatabricksNotebook",
+                                            "dependsOn": [],
+                                            "policy": {
+                                                "timeout": "7.00:00:00",
+                                                "retry": 0,
+                                                "retryIntervalInSeconds": 30,
+                                                "secureOutput": false,
+                                                "secureInput": false
+                                            },
+                                            "userProperties": [],
+                                            "typeProperties": {
+                                                "notebookPath": "/audit-Framework/dbn-etl-data-profiling-log",
+                                                "baseParameters": {
+                                                    "data_flow": {
+                                                        "value": "@pipeline().parameters.data_flow",
+                                                        "type": "Expression"
+                                                    },
+                                                    "adf_run_id": {
+                                                        "value": "@pipeline().parameters.adf_run_id",
+                                                        "type": "Expression"
+                                                    },
+                                                    "source_table_name": {
+                                                        "value": "@pipeline().parameters.source_table_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "target_table_name": {
+                                                        "value": "@pipeline().parameters.target_table_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "source_row_count": {
+                                                        "value": "@pipeline().parameters.source_row_count",
+                                                        "type": "Expression"
+                                                    },
+                                                    "database_name": {
+                                                        "value": "@pipeline().parameters.database_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "server_name": {
+                                                        "value": "@pipeline().parameters.database_server_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "target_row_count": {
+                                                        "value": "@pipeline().parameters.target_row_count",
+                                                        "type": "Expression"
+                                                    },
+                                                    "rejected_rows": {
+                                                        "value": "@pipeline().parameters.rejected_rows",
+                                                        "type": "Expression"
+                                                    },
+                                                    "load_start_datetime": {
+                                                        "value": "@pipeline().parameters.load_start_date",
+                                                        "type": "Expression"
+                                                    },
+                                                    "load_end_datetime": {
+                                                        "value": "@pipeline().parameters.load_end_date",
+                                                        "type": "Expression"
+                                                    }
+                                                }
+                                            },
+                                            "linkedServiceName": {
+                                                "referenceName": "ls_NDPdatabricks",
+                                                "type": "LinkedServiceReference",
+                                                "parameters": {
+                                                    "databricks_workspace_url": {
+                                                        "value": "@pipeline().parameters.databricks_workspace_url",
+                                                        "type": "Expression"
+                                                    },
+                                                    "databricks_clusterid": {
+                                                        "value": "@pipeline().parameters.databricks_clusterid",
+                                                        "type": "Expression"
+                                                    },
+                                                    "vault_url": {
+                                                        "value": "@pipeline().parameters.vaulturl",
+                                                        "type": "Expression"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "value": "ADS_to_CRM",
+                                    "activities": [
+                                        {
+                                            "name": "Data_Profiling_ADS_CRM",
+                                            "description": "starting ETL audit",
+                                            "type": "DatabricksNotebook",
+                                            "dependsOn": [],
+                                            "policy": {
+                                                "timeout": "7.00:00:00",
+                                                "retry": 0,
+                                                "retryIntervalInSeconds": 30,
+                                                "secureOutput": false,
+                                                "secureInput": false
+                                            },
+                                            "userProperties": [],
+                                            "typeProperties": {
+                                                "notebookPath": "/audit-Framework/dbn-etl-data-profiling-log",
+                                                "baseParameters": {
+                                                    "data_flow": {
+                                                        "value": "@pipeline().parameters.data_flow",
+                                                        "type": "Expression"
+                                                    },
+                                                    "adf_run_id": {
+                                                        "value": "@pipeline().parameters.adf_run_id",
+                                                        "type": "Expression"
+                                                    },
+                                                    "source_table_name": {
+                                                        "value": "@pipeline().parameters.source_table_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "target_table_name": {
+                                                        "value": "@pipeline().parameters.target_table_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "source_row_count": {
+                                                        "value": "@pipeline().parameters.source_row_count",
+                                                        "type": "Expression"
+                                                    },
+                                                    "database_name": {
+                                                        "value": "@pipeline().parameters.database_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "server_name": {
+                                                        "value": "@pipeline().parameters.database_server_name",
+                                                        "type": "Expression"
+                                                    },
+                                                    "target_row_count": {
+                                                        "value": "@pipeline().parameters.target_row_count",
+                                                        "type": "Expression"
+                                                    },
+                                                    "rejected_rows": {
+                                                        "value": "@pipeline().parameters.rejected_rows",
+                                                        "type": "Expression"
+                                                    },
+                                                    "load_start_datetime": {
+                                                        "value": "@pipeline().parameters.load_start_date",
+                                                        "type": "Expression"
+                                                    },
+                                                    "load_end_datetime": {
+                                                        "value": "@pipeline().parameters.load_end_date",
+                                                        "type": "Expression"
+                                                    }
+                                                }
+                                            },
+                                            "linkedServiceName": {
+                                                "referenceName": "ls_NDPdatabricks",
+                                                "type": "LinkedServiceReference"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {},
+                    "cancelAfter": {}
+                },
+                "parameters": {
+                    "log_type": {
+                        "type": "string"
+                    },
+                    "data_flow": {
+                        "type": "string"
+                    },
+                    "adf_run_id": {
+                        "type": "string"
+                    },
+                    "source_table_name": {
+                        "type": "string"
+                    },
+                    "target_table_name": {
+                        "type": "string"
+                    },
+                    "source_row_count": {
+                        "type": "string"
+                    },
+                    "target_row_count": {
+                        "type": "string"
+                    },
+                    "rejected_rows": {
+                        "type": "string"
+                    },
+                    "database_server_name": {
+                        "type": "string"
+                    },
+                    "database_name": {
+                        "type": "string"
+                    },
+                    "load_start_date": {
+                        "type": "string"
+                    },
+                    "load_end_date": {
+                        "type": "string"
+                    },
+                    "databricks_workspace_url": {
+                        "type": "string"
+                    },
+                    "databricks_clusterid": {
+                        "type": "string"
+                    },
+                    "vaulturl": {
+                        "type": "string"
+                    }
+                },
+                "folder": {
+                    "name": "Audit"
+                },
+                "annotations": [],
+                "lastPublishTime": "2022-07-30T06:28:22Z"
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/pip-distance-calculation')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "ExecuteSP - Distance Calculation",
+                        "type": "Script",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.10:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "az_synapse_crm_server": {
+                                    "value": "@pipeline().parameters.az_synapse_crm_server",
+                                    "type": "Expression"
+                                },
+                                "az_synapse_crm_db": {
+                                    "value": "@pipeline().parameters.az_synapse_crm_db",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "typeProperties": {
+                            "scripts": [
+                                {
+                                    "type": "Query",
+                                    "text": "EXECUTE fplus.GetDistanceCampus"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "UpdateDistanceInFplustable",
+                        "type": "Script",
+                        "dependsOn": [
+                            {
+                                "activity": "ExecuteSP - Distance Calculation",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "0.10:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "linkedServiceName": {
+                            "referenceName": "ls_AzureSynapseAnalyticsCrmDB",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "az_synapse_crm_server": {
+                                    "value": "@pipeline().parameters.az_synapse_crm_server",
+                                    "type": "Expression"
+                                },
+                                "az_synapse_crm_db": {
+                                    "value": "@pipeline().parameters.az_synapse_crm_db",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "typeProperties": {
+                            "scripts": [
+                                {
+                                    "type": "Query",
+                                    "text": {
+                                        "value": "select a.studentid,a.fqtorderid \nINTO #temp   \nfrom [fplus].[student_raw] as a   \nleft join fplus.CustomerOrder as c  \non a.fqtorderid = c.fqtorderid   \nleft join [fplus].[OrgModel] as b \non c.fqtorgmodelid=b.FqtOrgModelId   \nwhere c.orderstatusid = '5FD3E375-50AF-EB11-A9C6-000D3A062608'  \ngroup by a.studentid,a.fqtorderid;          \n\nselect distinct b.po_name as studentid,c.fqtorderid,po_distancefromcampus \ninto #temp1   \nfrom [dbo].[ContactBase] cb (NOLOCK)   \ninner join dbo.CustomerAddressBase cab on cab.parentid=cb.contactid and cab.active_flag=1 and cb.active_flag=1\ninner join dbo.po_idbase b (nolock) on cb.contactid = b.po_contactid and b.active_flag=1  \ninner join #temp c (nolock)  on b.po_name COLLATE DATABASE_DEFAULT = c.studentid COLLATE DATABASE_DEFAULT   \nwhere po_DistanceFromCampus is not null  group by b.po_name,po_distancefromcampus,c.fqtorderid;      \n\nUPDATE [fplus].[student_raw]   \nSET Distance = #temp1.po_DistanceFromCampus   \nfrom [fplus].[student_raw] a   \ninner join #temp1 \non a.studentid COLLATE DATABASE_DEFAULT =#temp1.studentid COLLATE DATABASE_DEFAULT  \nand a.fqtorderid COLLATE DATABASE_DEFAULT=#temp1.fqtorderid COLLATE DATABASE_DEFAULT      \n\ndrop table #temp;  \ndrop table #temp1;select a.studentid,a.fqtorderid \nINTO #temp   \nfrom [fplus].[student_raw] as a   \nleft join fplus.CustomerOrder as c  \non a.fqtorderid = c.fqtorderid   \nleft join [fplus].[OrgModel] as b \non c.fqtorgmodelid=b.FqtOrgModelId   \nwhere c.orderstatusid = '5FD3E375-50AF-EB11-A9C6-000D3A062608'  \ngroup by a.studentid,a.fqtorderid;          \n\nselect distinct b.po_name as studentid,c.fqtorderid,po_distancefromcampus \ninto #temp1   \nfrom [dbo].[ContactBase] cb (NOLOCK)   \ninner join dbo.CustomerAddressBase cab on cab.parentid=cb.contactid and cab.active_flag=1 and cb.active_flag=1  \ninner join dbo.po_idbase b (nolock) on cb.contactid = b.po_contactid and b.active_flag=1 \ninner join #temp c (nolock)  on b.po_name COLLATE DATABASE_DEFAULT = c.studentid COLLATE DATABASE_DEFAULT   \nwhere po_DistanceFromCampus is not null  group by b.po_name,po_distancefromcampus,c.fqtorderid;      \n\nUPDATE [fplus].[student_raw]   \nSET Distance = #temp1.po_DistanceFromCampus   \nfrom [fplus].[student_raw] a   \ninner join #temp1 \non a.studentid COLLATE DATABASE_DEFAULT =#temp1.studentid COLLATE DATABASE_DEFAULT  \nand a.fqtorderid COLLATE DATABASE_DEFAULT=#temp1.fqtorderid COLLATE DATABASE_DEFAULT      \n\ndrop table #temp;  \ndrop table #temp1;",
+                                        "type": "Expression"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {},
+                    "cancelAfter": {}
+                },
+                "parameters": {
+                    "az_synapse_crm_server": {
+                        "type": "string",
+                        "defaultValue": "rnlndpprodcrmsynapse.sql.azuresynapse.net"
+                    },
+                    "az_synapse_crm_db": {
+                        "type": "string",
+                        "defaultValue": "NDPPRODCRMPL1"
+                    }
+                },
+                "folder": {
+                    "name": "F+/Forward Flow"
+                },
+                "annotations": [],
+                "lastPublishTime": "2022-10-25T13:42:12Z"
+            },
+            "dependsOn": []
+        }
+    ]
+}
